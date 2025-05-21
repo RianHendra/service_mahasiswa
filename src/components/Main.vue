@@ -294,14 +294,14 @@
                   <div
                     class="col-md-4"
                     v-for="meal in pengumuman"
-                    :key="meal.idMeal"
+                    :key="meal.id"
                   >
                     <!--begin::Feature post-->
                     <div class="card-xl-stretch mx-md-3">
                       <a
                         class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5"
                         :style="{
-                          backgroundImage: 'url(' + meal.strMealThumb + ')',
+                          backgroundImage: 'url(' + meal.gambar_url + ')',
                         }"
                         data-fslightbox="lightbox-video-tutorials"
                       >
@@ -312,7 +312,7 @@
                           href="#"
                           class="fs-4 text-gray-900 fw-bold text-hover-primary text-gray-900 lh-base"
                         >
-                          {{ meal.strMeal }}
+                          {{ meal.judul }}
                         </a>
 
                         <div
@@ -320,11 +320,11 @@
                         >
                           {{
                             isExpanded
-                              ? meal.strInstructions
-                              : truncateText(meal.strInstructions)
+                              ? meal.isi
+                              : truncateText(meal.isi)
                           }}
                           <span
-                            v-if="meal.strInstructions.length > maxLength"
+                            v-if="meal.isi.length > maxLength"
                             @click="toggleExpanded"
                             style="color: blue; cursor: pointer"
                           >
@@ -416,7 +416,7 @@ export default {
   },
   mounted() {
     axios
-      .get('https://www.themealdb.com/api/json/v1/1/random.php')
+      .get('http://36.91.27.150:818/api/pengumuman')
       .then((response) => {
         this.pengumuman = response.data.meals;
         console.log('Data berhasil:', this.pengumuman);
