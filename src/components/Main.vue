@@ -293,15 +293,14 @@
                 <div class="row g-10">
                   <div
                     class="col-md-4"
-                    v-for="meal in pengumuman"
-                    :key="meal.id"
+                     v-for="item in pengumuman" :key="item.id"
                   >
                     <!--begin::Feature post-->
                     <div class="card-xl-stretch mx-md-3">
                       <a
                         class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5"
                         :style="{
-                          backgroundImage: 'url(' + meal.gambar_url + ')',
+                          backgroundImage: 'url(' + item.gambar_url + ')',
                         }"
                         data-fslightbox="lightbox-video-tutorials"
                       >
@@ -312,7 +311,7 @@
                           href="#"
                           class="fs-4 text-gray-900 fw-bold text-hover-primary text-gray-900 lh-base"
                         >
-                          {{ meal.judul }}
+                          {{ item.judul }}
                         </a>
 
                         <div
@@ -320,11 +319,11 @@
                         >
                           {{
                             isExpanded
-                              ? meal.isi
-                              : truncateText(meal.isi)
+                              ? item.isi
+                              : truncateText(item.isi)
                           }}
                           <span
-                            v-if="meal.isi.length > maxLength"
+                            v-if="item.isi.length > maxLength"
                             @click="toggleExpanded"
                             style="color: blue; cursor: pointer"
                           >
@@ -418,7 +417,7 @@ export default {
     axios
       .get('http://36.91.27.150:818/api/pengumuman')
       .then((response) => {
-        this.pengumuman = response.data.meals;
+        this.pengumuman = response.data;
         console.log('Data berhasil:', this.pengumuman);
       })
       .catch((error) => {
