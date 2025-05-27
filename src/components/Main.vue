@@ -206,28 +206,18 @@
                 <!--end::Header-->
                 <!--begin::Body-->
                 <div class="card-body pt-3">
-                  <div
-                    v-for="(kelas, index) in daftarKelas"
-                    :key="index"
-                    class="d-flex align-items-sm-center mb-7"
-                  >
+                  <div v-for="(kelas, index) in daftarKelas" :key="index" class="d-flex align-items-sm-center mb-7 border-bottom border-3">
                     <div class="symbol symbol-60px symbol-2by3 me-4">
-                      <div
-                        class="symbol-label"
-                        :style="`background-image: url('${kelas.image}')`"
-                      ></div>
+                      <div class="symbol-label" :style="`background-image: url('${kelas.image}')`"></div>
                     </div>
-                    <div
-                      class="d-flex flex-row-fluid flex-wrap align-items-center"
-                    >
+                    <div class="d-flex flex-row-fluid flex-wrap align-items-center">
                       <div class="flex-grow-1 me-2">
-                        <a
-                          href="#"
-                          class="text-gray-800 fw-bold text-hover-primary fs-6"
-                          >{{ kelas.namaMatkul }}</a
-                        >
+                        <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6" >{{ kelas.namaMatkul }}</a>
                         <span class="text-muted fw-semibold d-block pt-1">{{
-                          kelas.dosen
+                          kelas.id_pegawai
+                        }}</span>
+                        <span class="text-muted fw-semibold d-block pt-1">{{
+                          kelas.alias
                         }}</span>
                         <span class="text-muted fw-semibold d-block pt-1">{{
                           kelas.jam
@@ -237,33 +227,34 @@
                       <!-- Jika kelas sedang dibuka -->
                       <template v-if="kelas.statusKelas === 'dibuka'">
                         <button
-                          v-if="kelas.statusMahasiswa === 'belum'"
-                          @click="klikHadir(index)"
-                          class="btn btn-sm btn-success"
-                        >
-                          Hadir
-                        </button>
+                            v-if="kelas.statusMahasiswa === 'belum'"
+                            @click="klikHadir(index)"
+                            :disabled="loadingIndex === index"
+                            class="btn btn-sm btn-success kedap-kedip-jreng"
+                          >
+                            <span v-if="loadingIndex === index">
+                              <i class="fa fa-spinner fa-spin"></i> Tunggu ya...
+                            </span>
+                            <span v-else>
+                              Hadir
+                            </span>
+                          </button>
                         <span
-                          v-else-if="kelas.statusMahasiswa === 'hadir'"
-                          class="badge badge-light-success fs-8 fw-bold my-2"
-                        >
-                          Hadir
-                        </span>
+                            v-else-if="kelas.statusMahasiswa === 'hadir'"
+                            class="badge badge-light-success fs-8 fw-bold my-2"
+                          >
+                            Hadir
+                          </span>
                       </template>
 
                       <!-- Jika kelas sudah ditutup -->
                       <template v-else>
                         <span
-                          v-if="kelas.statusMahasiswa === 'hadir'"
-                          class="badge badge-light-success fs-8 fw-bold my-2"
-                        >
-                          Hadir
+                          v-if="kelas.statusMahasiswa === 'hadir'" class="badge badge-light-success fs-8 fw-bold my-2"> Hadir
                         </span>
                         <span
                           v-else
-                          class="badge badge-light-danger fs-8 fw-bold my-2"
-                        >
-                          Alfa
+                          class="badge badge-light-danger fs-8 fw-bold my-2">Alfa
                         </span>
                       </template>
                     </div>
@@ -380,24 +371,8 @@ export default {
       pengumuman: [],
       isExpanded: false,
       maxLength: 200,
-      daftarKelas: [
-        {
-          namaMatkul: 'Keamanan Jaringan',
-          dosen: 'KOES WIYATMOKO',
-          jam: '08.00 – 09.40',
-          image: '/assets/media/stock/600x400/img-20.jpg',
-          statusKelas: 'dibuka',
-          statusMahasiswa: 'belum',
-        },
-        {
-          namaMatkul: 'Kecerdasan Buatan',
-          dosen: 'Frista Rizky Rinandi, S.Kom., M.Kom.',
-          jam: '10.00 – 11.40',
-          image: '/assets/media/stock/600x400/img-19.jpg',
-          statusKelas: 'ditutup',
-          statusMahasiswa: 'belum',
-        },
-      ],
+      daftarKelas: [],
+      loadingIndex: null,
     };
   },
   computed: {
@@ -414,6 +389,7 @@ export default {
     },
   },
   mounted() {
+    this.getDataKelas();
     axios
       .get('http://36.91.27.150:818/api/pengumuman')
       .then((response) => {
@@ -425,6 +401,30 @@ export default {
       });
   },
   methods: {
+    async getDataKelas() {
+      try {
+        const response = await axios.get('http://36.91.27.150:815/api/presensi/matkul-dosen/354');
+        const dataAPI = response.data;
+
+        this.daftarKelas = dataAPI.filter(item => item.id_kelas === 309)
+        .map(item => ({
+          id_kelas_mk: item.id_kelas_mk,
+          id_kelas: item.id_kelas,
+          id_pegawai: item.id_pegawai,
+          id_mk: item.kurikulum.mata_kuliah.id_mk,
+          namaMatkul: item.kurikulum.mata_kuliah.nama_mk,
+          alias: item.kelas.alias,
+          image: '/assets/media/stock/600x400/img-20.jpg', // bisa di-random atau ganti dinamis
+          jam: '08.00 – 09.40', // bisa kamu atur sesuai kebutuhan atau ambil dari API kalau ada
+          statusKelas: 'dibuka',
+          statusMahasiswa: 'belum',
+          namaKelas : item.kelas.nama_kelas
+        }));
+
+      } catch (error) {
+        console.error('Gagal ambil data kelas:', error);
+      }
+    },
     getImageUrl(filename) {
       return `http://192.168.74.105:8000/storage/${filename}`;
     },
@@ -439,15 +439,22 @@ export default {
       return text;
     },
     klikHadir(index) {
-      this.daftarKelas[index].statusMahasiswa = 'hadir';
-      Swal.fire({
-        icon: 'success',
-        title: 'Kehadiran tercatat!',
-        text: `Anda telah hadir di kelas ${this.daftarKelas[index].namaMatkul}.`,
-        showConfirmButton: false,
-        timer: 2000,
-        position: 'center', // alert di tengah
-      });
+  this.loadingIndex = index;
+
+  // simulasi delay 1.5 detik (kayak proses loading)
+      setTimeout(() => {
+        this.daftarKelas[index].statusMahasiswa = 'hadir';
+        this.loadingIndex = null;
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Kehadiran tercatat!',
+          text: `Anda telah hadir di kelas ${this.daftarKelas[index].namaMatkul}.`,
+          showConfirmButton: false,
+          timer: 2000,
+          position: 'center',
+        });
+      }, 1500);
     },
   },
 };
@@ -457,4 +464,23 @@ export default {
 .text-justify {
   text-align: justify;
 }
+@keyframes kedapKedipJreng {
+  0%, 100% {
+    transform: scale(1);
+    background-color: #28a745; /* hijau sukses */
+    box-shadow: 0 0 0px rgba(40, 167, 69, 0.8);
+  }
+  50% {
+    transform: scale(1.1);
+    background-color: #34d058; /* hijau terang */
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.8);
+  }
+}
+
+.kedap-kedip-jreng {
+  animation: kedapKedipJreng 1s infinite;
+  transition: all 0.3s ease-in-out;
+}
+
+
 </style>
