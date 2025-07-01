@@ -222,7 +222,7 @@ export default {
     localStorage.removeItem('authToken')
     localStorage.removeItem('userEmail')
     localStorage.removeItem('userRole')
-    localStorage.removeItem('UserNim')
+    localStorage.removeItem('nim')
     localStorage.removeItem('loggedIn')
 
     this.$router.push('/')
@@ -239,6 +239,7 @@ export default {
             this.$router.push('/')
           }, 2000)
   }
+  
 }
 
   }
