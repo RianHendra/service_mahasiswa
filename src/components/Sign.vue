@@ -90,74 +90,42 @@ export default {
       password: '',
       loading: false,
       errorMsg: '',
-      manualLoginActive: false // nanti ganti ke false kalau pakai API asli
+      manualLoginActive: false
     }
   },
   methods: {
     async handleLogin() {
-  this.loading = true
-  this.errorMsg = ''
+      this.loading = true
+      this.errorMsg = ''
 
-<<<<<<< HEAD
-  try {
-    const response = await axios.post('https://ti054d01.agussbn.my.id/api/login', {
-      username: this.username, // sesuai dokumentasi
-      password: this.password
-    })
-=======
-      if (this.manualLoginActive) {
-        // login manual
-        if (this.username === 'admin' && this.password === '123') {
-          localStorage.setItem('token', 'manual-token-123')
-          localStorage.setItem('user', JSON.stringify({ email: 'admin@sim.com', role: 'admin' }))
-          alert('Login berhasil!')
-          this.$router.push('/dashboard') // redirect setelah login
+      try {
+        const response = await axios.post('https://ti054d01.agussbn.my.id/api/login', {
+          username: this.username, // sesuai dokumentasi (login, bukan username)
+          password: this.password
+        })
+
+        const result = response.data
+        console.log('API Response:', result)
+
+        if (result.token) {
+          localStorage.setItem('authToken', result.token)
+          localStorage.setItem('userEmail', result.user?.email || '')
+          localStorage.setItem('userRole', result.user?.role || '')
+          localStorage.setItem('loggedIn', 'true')
+
+          this.$router.push('/dashboard')
         } else {
-          this.errorMsg = 'Username atau password salah.'
+          this.errorMsg = result.message || 'Login gagal.'
         }
-      } else {
-        // login via API (kalau nanti pakai backend beneran)
-        try {
-          const response = await axios.post('https://ti054d01.agussbn.my.id/api/login', {
-            username: this.username,
-            password: this.password
-          })
-          if (response.data.token) {
-            localStorage.setItem('token', response.data.token)
-            localStorage.setItem('user', JSON.stringify(response.data.user))
-	    localStorage.setItem('loggedIn', 'true')
-            this.$router.push('/dashboard')
-          } else {
-            this.errorMsg = 'Login gagal.'
-          }
-        } catch (error) {
-          this.errorMsg = 'Gagal menghubungi server.'
-          console.error(error)
-        }
+      } catch (error) {
+        this.errorMsg = 'Gagal menghubungi server.'
+        console.error(error)
       }
->>>>>>> e5045f2b2f89fec90e8295ea6cd536f9f6793725
 
-    const result = response.data
-    console.log('API Response:', result)
-
-    if (result.token) {
-      localStorage.setItem('authToken', result.token)
-      localStorage.setItem('userEmail', result.user?.email || '')
-      localStorage.setItem('userRole', result.user?.role || '')
-      localStorage.setItem('loggedIn', 'true') // PENTING: biar router tahu kita sudah login
-
-      this.$router.push('/dashboard')
-    } else {
-      this.errorMsg = result.message || 'Login gagal.'
+      this.loading = false
     }
-  } catch (error) {
-    this.errorMsg = 'Gagal menghubungi server.'
-    console.error(error)
   }
+}
 
-  this.loading = false
-}
-  }
-}
 </script>
 
