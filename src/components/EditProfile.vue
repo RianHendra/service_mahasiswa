@@ -441,7 +441,7 @@ export default {
     },
     async updateProfil() {
   try {
-    const nim = this.nimMhs
+    const nim = localStorage.getItem('UserNim')
     const dataUpdate = {
       _method: 'PUT', // 👈 Ini kunci penting!
       nama_mhs: this.namaMhs,
