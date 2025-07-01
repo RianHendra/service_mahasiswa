@@ -470,6 +470,8 @@ export default {
       showConfirmButton: false
     })
 
+    this.$router.push('/profil')
+
   } catch (error) {
     console.error('Gagal update:', error)
     Swal.fire({
