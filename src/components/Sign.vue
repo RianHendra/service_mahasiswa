@@ -98,11 +98,44 @@ export default {
   this.loading = true
   this.errorMsg = ''
 
+<<<<<<< HEAD
   try {
     const response = await axios.post('https://ti054d01.agussbn.my.id/api/login', {
       username: this.username, // sesuai dokumentasi
       password: this.password
     })
+=======
+      if (this.manualLoginActive) {
+        // login manual
+        if (this.username === 'admin' && this.password === '123') {
+          localStorage.setItem('token', 'manual-token-123')
+          localStorage.setItem('user', JSON.stringify({ email: 'admin@sim.com', role: 'admin' }))
+          alert('Login berhasil!')
+          this.$router.push('/dashboard') // redirect setelah login
+        } else {
+          this.errorMsg = 'Username atau password salah.'
+        }
+      } else {
+        // login via API (kalau nanti pakai backend beneran)
+        try {
+          const response = await axios.post('https://ti054d01.agussbn.my.id/api/login', {
+            username: this.username,
+            password: this.password
+          })
+          if (response.data.token) {
+            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('user', JSON.stringify(response.data.user))
+	    localStorage.setItem('loggedIn', 'true')
+            this.$router.push('/dashboard')
+          } else {
+            this.errorMsg = 'Login gagal.'
+          }
+        } catch (error) {
+          this.errorMsg = 'Gagal menghubungi server.'
+          console.error(error)
+        }
+      }
+>>>>>>> e5045f2b2f89fec90e8295ea6cd536f9f6793725
 
     const result = response.data
     console.log('API Response:', result)
