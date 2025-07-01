@@ -441,40 +441,37 @@ export default {
     },
     async updateProfil() {
   try {
-    const nim = this.nimMhs || localStorage.getItem('nim')
-    const payload = {
+    const nim = this.nimMhs
+    const dataUpdate = {
       nama_mhs: this.namaMhs,
       email: this.emailMhs,
       handphone: this.handphone
     }
 
-    const response = await axios.patch(
-      `https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}`,
-      payload,
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
+    const response = await axios.patch(`https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}`, dataUpdate, {
+      headers: {
+        'Content-Type': 'application/json'
       }
-    )
+    })
 
-    console.log('Update berhasil:', response.data)
-
+    console.log('Berhasil update:', response.data)
     Swal.fire({
       icon: 'success',
-      title: 'Berhasil Update',
+      title: 'Profil berhasil diperbarui!',
       timer: 2000,
       showConfirmButton: false
     })
+
   } catch (error) {
     console.error('Gagal update:', error)
     Swal.fire({
       icon: 'error',
-      title: 'Gagal Update',
-      text: error.response?.data?.message || 'Terjadi kesalahan saat mengirim data'
+      title: 'Gagal update!',
+      text: error.response?.data?.message || 'Terjadi kesalahan.'
     })
   }
 }
+
 
 
   }
