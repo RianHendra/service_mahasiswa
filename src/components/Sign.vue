@@ -112,9 +112,11 @@ export default {
           localStorage.setItem('authToken', result.token)
           localStorage.setItem('userEmail', result.user?.email || '')
           localStorage.setItem('userRole', result.user?.role || '')
+          localStorage.setItem('nim', result.user?.username)
+
           localStorage.setItem('loggedIn', 'true')
 
-          Swal.fire({
+          await Swal.fire({
             icon: 'success',
             title: 'Berhasil Login',
             text: 'Selamat datang kembali!',
@@ -138,7 +140,7 @@ export default {
           Swal.fire({
             icon: 'error',
             title: 'Gagal Login',
-            text: error.response.data.message || 'Login gagal.'
+            text: error.response.data.message || 'Password salah.'
           })
         } else if (error.request) {
           console.error('No response:', error.request)

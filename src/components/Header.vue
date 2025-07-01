@@ -68,7 +68,7 @@
             >
               <!--begin:Menu link-->
               <span class="menu-link">
-                <span class="menu-title">Halo, Selamat Datang Rafly</span>
+                <span class="menu-title">Halo, Selamat Datang {{ namaMhs }}</span>
                 <span class="menu-arrow d-lg-none"></span>
               </span>
               <!--end:Menu link-->
@@ -90,7 +90,7 @@
               data-kt-menu-attach="parent"
               data-kt-menu-placement="bottom-end"
             >
-              <img src="/rafly.png" class="rounded-3" alt="user" />
+              <img :src="fotoMhs" class="rounded-3" alt="user" />
             </div>
             <!--begin::User account menu-->
             <div
@@ -108,7 +108,7 @@
                   <!--begin::Username-->
                   <div class="d-flex flex-column">
                     <div class="fw-bold d-flex align-items-center fs-5">
-                      Muhammad Rafly Adriazka
+                      {{ namaMhs }}
                       <span
                         class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2"
                         >Pro</span
@@ -117,7 +117,7 @@
                     <a
                       href="#"
                       class="fw-semibold text-muted text-hover-primary fs-7"
-                      >rafka@gmail.com</a
+                      >{{ emailMhs }}</a
                     >
                   </div>
                   <!--end::Username-->
@@ -208,3 +208,36 @@
   </div>
   <!--end::Header-->
 </template>
+<script>
+import axios from 'axios'
+
+export default {
+  data() {
+    return {
+      namaMhs: '',
+      nimMhs: '',
+      emailMhs: '',
+      fotoMhs: '',
+    }
+  },
+  mounted() {
+    this.getProfilMahasiswa()
+  },
+  methods: {
+    async getProfilMahasiswa() {
+      try {
+        const nim = localStorage.getItem('nim') // pastikan localStorage ini ada ya
+        const res = await axios.get(`https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}`)
+        const data = res.data
+
+        this.namaMhs = data.nama_mhs
+        this.nimMhs = data.nim
+        this.emailMhs = data.email
+        this.fotoMhs = data.foto_warna_url
+      } catch (err) {
+        console.error('Gagal ambil data profil mahasiswa:', err)
+      }
+    }
+  }
+}
+</script>
