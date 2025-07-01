@@ -211,7 +211,7 @@
                       <div class="symbol-label" :style="`background-image: url('${kelas.image}')`"></div>
                     </div>
                     <div class="d-flex flex-row-fluid flex-wrap align-items-center">
-                      <div class="flex-grow-1 me-2">
+                      <div class="flex-grow-1 me-2 mb-5">
                         <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6" >{{ kelas.namaMatkul }}</a>
                         <span class="text-muted fw-semibold d-block pt-1">{{
                           kelas.id_pegawai
@@ -219,7 +219,7 @@
                         <span class="text-muted fw-semibold d-block pt-1">{{
                           kelas.alias
                         }}</span>
-                        <span class="text-muted fw-semibold d-block pt-1">{{
+                        <span class="text-muted fw-semibold d-block pt-1 ">{{
                           kelas.jam
                         }}</span>
                       </div>
@@ -233,7 +233,7 @@
                             class="btn btn-sm btn-success kedap-kedip-jreng"
                           >
                             <span v-if="loadingIndex === index">
-                              <i class="fa fa-spinner fa-spin"></i> Tunggu ya...
+                              <i class="fa fa-spinner fa-spin"></i> Tunggu..
                             </span>
                             <span v-else>
                               Hadir
@@ -403,27 +403,34 @@ export default {
   methods: {
     async getDataKelas() {
       try {
-        const response = await axios.get('http://36.91.27.150:815/api/presensi/matkul-dosen/354');
+        const response = await axios.get('http://ti054d01.agussbn.my.id/api/presensi/matkul-dosen/2');
         const dataAPI = response.data;
 
-        this.daftarKelas = dataAPI.filter(item => item.id_kelas === 309)
-        .map(item => ({
-          id_kelas_mk: item.id_kelas_mk,
-          id_kelas: item.id_kelas,
-          id_pegawai: item.id_pegawai,
-          id_mk: item.kurikulum.mata_kuliah.id_mk,
-          namaMatkul: item.kurikulum.mata_kuliah.nama_mk,
-          alias: item.kelas.alias,
-          image: '/assets/media/stock/600x400/img-20.jpg', // bisa di-random atau ganti dinamis
-          jam: '08.00 – 09.40', // bisa kamu atur sesuai kebutuhan atau ambil dari API kalau ada
-          statusKelas: 'dibuka',
-          statusMahasiswa: 'belum',
-          namaKelas : item.kelas.nama_kelas
-        }));
+      
+       this.daftarKelas = dataAPI.map(item => ({
+        id_kelas_mk: item.id_kelas_mk,
+        id_kelas: item.id_kelas,
+        id_pegawai: item.id_pegawai,
+        id_mk: item.kurikulum?.mata_kuliah?.id_mk,
+        namaMatkul: item.kurikulum?.mata_kuliah?.nama_mk,
+        alias: item.kelas?.alias,
+        image: '/assets/media/stock/600x400/img-20.jpg',
+        jam: '08.00 – 09.40',
+        statusKelas: 'dibuka',
+        statusMahasiswa: 'belum',
+        namaKelas: item.kelas?.nama_kelas
+      }));
+
 
       } catch (error) {
         console.error('Gagal ambil data kelas:', error);
       }
+      
+    },
+
+    logout() {
+      localStorage.removeItem('loggedIn')
+      this.$router.push('/')
     },
     getImageUrl(filename) {
       return `http://192.168.74.105:8000/storage/${filename}`;
