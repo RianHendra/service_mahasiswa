@@ -90,7 +90,6 @@ export default {
       password: '',
       loading: false,
       errorMsg: '',
-      manualLoginActive: false
     }
   },
   methods: {
