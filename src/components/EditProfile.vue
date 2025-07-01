@@ -79,10 +79,7 @@
 										<!--end::Menu item-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<button @click="logout" class="btn btn-danger">
-                                                            Logout
-                                                            </button>
-
+											<a @click="logout" class="menu-link px-5">Logout</a>
 										</div>
 										<!--end::Menu item-->
 									</div>
@@ -503,6 +500,9 @@ logout() {
         showConfirmButton: false
       })
     })
+    setTimeout(() => {
+            this.$router.push('/')
+          }, 2000)
   }
 
 
