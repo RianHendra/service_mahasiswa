@@ -112,8 +112,7 @@ export default {
           localStorage.setItem('authToken', result.token)
           localStorage.setItem('userEmail', result.user?.email || '')
           localStorage.setItem('userRole', result.user?.role || '')
-          localStorage.setItem('nim', result.user?.nim || '')
-
+          localStorage.setItem('UserNim', result.user?.nim || '')
           localStorage.setItem('loggedIn', 'true')
 
           await Swal.fire({
