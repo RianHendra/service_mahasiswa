@@ -90,7 +90,7 @@
               data-kt-menu-attach="parent"
               data-kt-menu-placement="bottom-end"
             >
-              <img :src="fotoMhs" class="rounded-3" alt="user" />
+              <img src="/rafly.png" class="rounded-3" alt="user" />
             </div>
             <!--begin::User account menu-->
             <div
@@ -222,11 +222,21 @@ export default {
   },
   mounted() {
     this.getProfilMahasiswa()
+
+    // Tunggu DOM selesai render, lalu inisialisasi dropdown menu Metronic
+    this.$nextTick(() => {
+      if (window.KTMenu) {
+        window.KTMenu.createInstances()
+        console.log('KTMenu initialized')
+      } else {
+        console.warn('KTMenu not available')
+      }
+    })
   },
   methods: {
     async getProfilMahasiswa() {
       try {
-        const nim = localStorage.getItem('UserNim') // pastikan localStorage ini ada ya
+        const nim = localStorage.getItem('UserNim')
         const res = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/${nim}`)
         const data = res.data
 
