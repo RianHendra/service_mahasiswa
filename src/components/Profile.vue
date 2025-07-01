@@ -61,6 +61,7 @@
 												<!--begin::Username-->
 												<div class="d-flex flex-column">
 													<div class="fw-bold d-flex align-items-center fs-5">{{ namaMhs }}
+													</div>
 													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ emailMhs }}</a>
 												</div>
 												<!--end::Username-->
