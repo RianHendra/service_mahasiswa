@@ -126,18 +126,32 @@ export default {
 					this.$router.push('/dashboard')
 				}, 2000)
         } else {
-          this.errorMsg = result.message || 'Login gagal.'
+         Swal.fire({
+				icon: 'error',
+				title: 'Gagal Login',
+				text: result.message || 'Username atau password salah.'
+				})
         }
       } catch (error) {
         if (error.response) {
           console.error('Response error:', error.response.data)
           this.errorMsg = error.response.data.message || 'Login gagal.'
+		  
         } else if (error.request) {
           console.error('No response:', error.request)
-          this.errorMsg = 'Tidak ada respon dari server.'
+		   Swal.fire({
+				icon: 'error',
+				title: 'Gagal Login',
+				text: result.message || 'Tidak ada respon dari server.'
+				})
+        
         } else {
           console.error('Error:', error.message)
-          this.errorMsg = 'Terjadi kesalahan saat login.'
+		  Swal.fire({
+				icon: 'error',
+				title: 'Gagal Login',
+				text: result.message || 'Terjadi kesalahan saat login.'
+				})
         }
       }
 
