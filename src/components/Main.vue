@@ -427,12 +427,12 @@ export default {
     })
     // Map data sederhana
     const images = [
-  'https://i.pinimg.com/736x/c7/32/aa/c732aa4a7ac0a2ca5089badbfded8a24.jpg',
-  'https://i.pinimg.com/564x/bb/41/01/bb410105e2708d0c949d4c360b6f0718.jpg',
-  'https://i.pinimg.com/564x/2f/8c/2e/2f8c2e2c3db60ac35234909c5cb52fcd.jpg',
-  'https://i.pinimg.com/564x/25/d4/6a/25d46a49149c7a3a9638de437e0eaad1.jpg',
-  'https://i.pinimg.com/564x/6c/c3/35/6cc33570d9db8e1e009dc1be20ad758f.jpg'
+  'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+  'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
+  'https://images.unsplash.com/photo-1522199755839-a2bacb67c546',
+  'https://images.unsplash.com/photo-1522199755839-a2bsdfgds546'
 ]
+
     this.daftarKelas = hariIni.map(item => {
   const randomImage = images[Math.floor(Math.random() * images.length)]
   return {
