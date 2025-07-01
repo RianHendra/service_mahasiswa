@@ -403,7 +403,7 @@ export default {
   methods: {
    async getKelasHariIni() {
   try {
-    const nim = localStorage.getItem('nim')
+    const nim = localStorage.getItem('UserNim')
     const res = await axios.get(`https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}/presensi-aktif`)
     const dataPresensi = res.data
 
