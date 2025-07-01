@@ -100,7 +100,7 @@ export default {
 
       try {
         const response = await axios.post('https://ti054d01.agussbn.my.id/api/login', {
-          username: this.username, // sesuai dokumentasi (login, bukan username)
+          username: this.username, 
           password: this.password
         })
 
@@ -112,7 +112,7 @@ export default {
           localStorage.setItem('userEmail', result.user?.email || '')
           localStorage.setItem('userRole', result.user?.role || '')
           localStorage.setItem('loggedIn', 'true')
-
+		console.log('Redirecting ke dashboard...')
           this.$router.push('/dashboard')
         } else {
           this.errorMsg = result.message || 'Login gagal.'
