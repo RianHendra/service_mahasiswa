@@ -100,11 +100,10 @@ export default {
   methods: {
     async handleLogin() {
       try {
-        const response = await axios.post('http://ti054d01.agussbn.my.id/api/login', 
-		
-			console.log('Mengirim login:', this.username, this.password),
-{
-          username: this.username,
+        console.log('Mengirim login:', this.username, this.password) // Pisahkan log
+
+        const response = await axios.post('http://ti054d01.agussbn.my.id/api/login', {
+          login: this.username, // sesuaikan dengan body dari backend temanmu
           password: this.password
         })
 
@@ -126,3 +125,4 @@ export default {
   }
 }
 </script>
+
