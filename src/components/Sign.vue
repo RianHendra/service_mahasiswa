@@ -81,7 +81,7 @@
 
 </template>
 <script>
-import axios from 'axios'
+	import axios from 'axios'
 export default {
   name: 'Sign',
   data() {
@@ -99,7 +99,7 @@ export default {
 
       try {
         const response = await axios.post('https://ti054d01.agussbn.my.id/api/login', {
-          username: this.username, 
+          username: this.username, // pakai login jika dokumentasi awal pakai ini
           password: this.password
         })
 
@@ -111,14 +111,22 @@ export default {
           localStorage.setItem('userEmail', result.user?.email || '')
           localStorage.setItem('userRole', result.user?.role || '')
           localStorage.setItem('loggedIn', 'true')
-		console.log('Redirecting ke dashboard...')
+          console.log('Redirecting ke dashboard...')
           this.$router.push('/dashboard')
         } else {
           this.errorMsg = result.message || 'Login gagal.'
         }
       } catch (error) {
-        this.errorMsg = 'Gagal menghubungi server.'
-        console.error(error)
+        if (error.response) {
+          console.error('Response error:', error.response.data)
+          this.errorMsg = error.response.data.message || 'Login gagal.'
+        } else if (error.request) {
+          console.error('No response:', error.request)
+          this.errorMsg = 'Tidak ada respon dari server.'
+        } else {
+          console.error('Error:', error.message)
+          this.errorMsg = 'Terjadi kesalahan saat login.'
+        }
       }
 
       this.loading = false
