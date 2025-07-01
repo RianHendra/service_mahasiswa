@@ -410,12 +410,17 @@ export default {
 
     const today = new Date().toISOString().split('T')[0]
 
-    const hariIni = dataPresensi.filter(item =>
-      item.presensi_dosen &&
-      item.presensi_dosen.tgl_presesi === today &&
-      item.presensi_dosen.status_presensi_dosen === "1"
-    )
-
+    const seen = new Set()
+    const hariIni = dataPresensi.filter(item => {
+      const idMk = item.presensi_dosen?.id_kelas_mk
+      const isToday = item.presensi_dosen?.tgl_presesi === today
+      const isOpen = item.presensi_dosen?.status_presensi_dosen === "1"
+      if (idMk && isToday && isOpen && !seen.has(idMk)) {
+        seen.add(idMk)
+        return true
+      }
+      return false
+    })
     // Map data sederhana
     this.daftarKelas = hariIni.map(item => ({
       id_kelas_mk: item.presensi_dosen.id_kelas_mk,
