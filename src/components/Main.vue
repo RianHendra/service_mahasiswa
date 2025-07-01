@@ -426,12 +426,13 @@ export default {
       return false
     })
     // Map data sederhana
-    const images = [
-  'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
-  'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
-  'https://images.unsplash.com/photo-1522199755839-a2bacb67c546',
-  'https://images.unsplash.com/photo-1522199755839-a2bsdfgds546'
+   const images = [
+  'https://images.unsplash.com/photo-1519389950473-47ba0277781c',
+  'https://images.unsplash.com/photo-1537432376769-00a1e4b1c1aa',
+  'https://images.unsplash.com/photo-1504384308090-c894fdcc538d',
+  'https://images.unsplash.com/photo-1559027615-cdcbcb8f43f3'
 ]
+
 
     this.daftarKelas = hariIni.map(item => {
   const randomImage = images[Math.floor(Math.random() * images.length)]
