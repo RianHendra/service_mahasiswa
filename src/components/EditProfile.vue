@@ -302,7 +302,7 @@
 										<!--begin::Content-->
 										<div id="kt_account_settings_profile_details" class="collapse show">
 											<!--begin::Form-->
-											<form id="kt_account_profile_details_form" class="form">
+											<form id="kt_account_profile_details_form" class="form" @submit.prevent="updateProfil">
                                                 <!--begin::Card body-->
                                                 <div class="card-body border-top p-9">
                                                   <!-- Foto -->
@@ -330,7 +330,7 @@
                                                   <div class="row mb-6">
                                                     <label class="col-lg-4 col-form-label required fw-semibold fs-6">NIM</label>
                                                     <div class="col-lg-8 fv-row">
-                                                      <input type="text" name="nim" disabled class="form-control form-control-lg form-control-solid" placeholder="NIM" value="{{ nimMhs }}" />
+                                                      <input type="text" name="nim" disabled class="form-control form-control-lg form-control-solid" placeholder="NIM" v-model="nimMhs"/>
                                                     </div>
                                                   </div>
                                                   <!-- Nama Lengkap -->
@@ -338,7 +338,7 @@
                                                     <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Lengkap</label>
                                                   
                                                         <div class="col-lg-8 fv-row">
-                                                          <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" v-model="nimMhs" />
+                                                          <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" v-model="namaMhs" />
                                                    
                                                     </div>
                                                   </div>
@@ -400,7 +400,7 @@
 </template>
 <script>
 import axios from 'axios'
-
+import Swal from 'sweetalert2'
 export default {
   data() {
     return {
@@ -437,6 +437,33 @@ export default {
         
       } catch (err) {
         console.error('Gagal ambil data profil mahasiswa:', err)
+      }
+    },
+    async updateProfil() {
+      const nim = this.nimMhs
+      try {
+        const payload = {
+          nama_mhs: this.namaMhs,
+          email: this.emailMhs,
+          handphone: this.handphone,
+        }
+
+        const res = await axios.put(`https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}`, payload)
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: 'Profil berhasil diperbarui!',
+          timer: 2000,
+          showConfirmButton: false,
+        })
+      } catch (error) {
+        console.error('Gagal update:', error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: 'Gagal memperbarui data.',
+        })
       }
     }
   }
