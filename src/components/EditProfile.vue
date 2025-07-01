@@ -470,7 +470,9 @@ export default {
       showConfirmButton: false
     })
 
-    this.$router.push('/profil')
+    setTimeout(() => {
+            this.$router.push('/profil')
+          }, 1000)
 
   } catch (error) {
     console.error('Gagal update:', error)
