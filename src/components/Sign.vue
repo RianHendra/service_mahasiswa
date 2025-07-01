@@ -11,29 +11,29 @@
 						<!--begin::Wrapper-->
 						<div class="w-lg-500px p-10">
 							<!--begin::Form-->
-								<form class="form w-100" @submit.prevent="handleLogin">
-								<div class="text-center mb-11">
-									<h1 class="text-gray-900 fw-bolder mb-3">Login</h1>
-									<div class="text-gray-500 fw-semibold fs-6">Halaman Login Mahasiswa</div>
-								</div>
+							<form class="form w-100" @submit.prevent="handleLogin">
+												<div class="text-center mb-11">
+												<h1 class="text-gray-900 fw-bolder mb-3">Login</h1>
+												<div class="text-gray-500 fw-semibold fs-6">Halaman Login Mahasiswa</div>
+												</div>
 
-								<div class="fv-row mb-8">
-									<input type="text" placeholder="Username" v-model="username" class="form-control bg-transparent" />
-								</div>
+												<div class="fv-row mb-8">
+												<input type="text" placeholder="Username" v-model="username" autocomplete="off" class="form-control bg-transparent" />
+												</div>
 
-								<div class="fv-row mb-8">
-									<input type="password" placeholder="Password" v-model="password" class="form-control bg-transparent" />
-								</div>
+												<div class="fv-row mb-8">
+												<input type="password" placeholder="Password" v-model="password" autocomplete="off" class="form-control bg-transparent" />
+												</div>
 
-								<div class="fv-row mb-8">
-									<button type="submit" class="btn btn-primary w-100">Login</button>
-								</div>
+												<div class="fv-row mb-8">
+												<button type="submit" class="btn btn-primary w-100">Login</button>
+												</div>
 
-								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-									<div></div>
-									<a href="#" class="link-primary">Lupa Password?</a>
-								</div>
-								</form>
+												<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+												<div></div>
+												<a href="#" class="link-primary">Lupa Password?</a>
+												</div>
+											</form>
 							<!--end::Form-->
 						</div>
 						<!--end::Wrapper-->
@@ -81,6 +81,7 @@
 
 </template>
 <script>
+import axios from 'axios'
 export default {
   name: 'Sign',
   data() {
