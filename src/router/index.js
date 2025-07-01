@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
-}),
+})
 router.afterEach((to) => {
   if (to.name === 'Sign') {
     document.title = 'SIMPADU | Login'

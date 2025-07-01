@@ -96,6 +96,8 @@ export default {
     async handleLogin() {
       this.loading = true
       this.errorMsg = ''
+	  console.log("Username:", this.username)
+      console.log("Password:", this.password)
 
       if (this.manualLoginActive) {
         // login manual
@@ -111,7 +113,7 @@ export default {
         // login via API (kalau nanti pakai backend beneran)
         try {
           const response = await axios.post('https://ti054d01.agussbn.my.id/api/login', {
-            login: this.username,
+            username: this.username,
             password: this.password
           })
           if (response.data.token) {
