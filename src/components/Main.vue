@@ -431,18 +431,20 @@ export default {
       return false
     })
     // Map data sederhana
-    const randomImage = images[Math.floor(Math.random() * images.length)];
-    this.daftarKelas = hariIni.map(item => ({
-      id_kelas_mk: item.presensi_dosen.id_kelas_mk,
-      namaMatkul: `Kelas MK ${item.presensi_dosen.id_kelas_mk}`, // placeholder
-      alias: '', // kosongkan dulu
-      jam: item.presensi_dosen.waktu_presensi || '08.00 – 09.40',
-      id_pegawai: '', // kosongkan dulu
-      image: randomImage,
-      statusKelas: 'dibuka',
-      statusMahasiswa: item.status_presensi_mhs === '1' ? 'hadir' : 'belum',
-      namaKelas: ''
-    }))
+    this.daftarKelas = hariIni.map(item => {
+  const randomImage = images[Math.floor(Math.random() * images.length)]
+  return {
+    id_kelas_mk: item.presensi_dosen.id_kelas_mk,
+    namaMatkul: `Kelas MK ${item.presensi_dosen.id_kelas_mk}`,
+    alias: '',
+    jam: item.presensi_dosen.waktu_presensi || '08.00 – 09.40',
+    id_pegawai: '',
+    image: randomImage,
+    statusKelas: 'dibuka',
+    statusMahasiswa: item.status_presensi_mhs === '1' ? 'hadir' : 'belum',
+    namaKelas: ''
+  }
+})
   } catch (err) {
     console.error('Gagal ambil data kelas hari ini:', err)
   }
