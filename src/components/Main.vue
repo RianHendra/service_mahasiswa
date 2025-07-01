@@ -407,19 +407,20 @@ export default {
     const res = await axios.get(`https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}/presensi-aktif`)
     const dataPresensi = res.data
     console.log(dataPresensi)
-    const images = [
-    '/assets/media/stock/600x400/img-20.jpg',
-    '/assets/media/stock/600x400/img-21.jpg',
-    '/assets/media/stock/600x400/img-22.jpg',
-    '/assets/media/stock/600x400/img-23.jpg',
-    '/assets/media/stock/600x400/img-24.jpg'
-  ];
+    
 
     const today = new Date().toISOString().split('T')[0]
-
+    const images = [
+        '/assets/media/stock/600x400/img-20.jpg',
+        '/assets/media/stock/600x400/img-21.jpg',
+        '/assets/media/stock/600x400/img-22.jpg',
+        '/assets/media/stock/600x400/img-23.jpg',
+        '/assets/media/stock/600x400/img-24.jpg'
+      ];
+      
     const seen = new Set()
     const hariIni = dataPresensi.filter(item => {
-      const randomImage = images[Math.floor(Math.random() * images.length)];
+      
       const idMk = item.presensi_dosen?.id_kelas_mk
       const isToday = item.presensi_dosen?.tgl_presesi === today
       const isOpen = item.presensi_dosen?.status_presensi_dosen === "1"
@@ -430,6 +431,7 @@ export default {
       return false
     })
     // Map data sederhana
+    const randomImage = images[Math.floor(Math.random() * images.length)];
     this.daftarKelas = hariIni.map(item => ({
       id_kelas_mk: item.presensi_dosen.id_kelas_mk,
       namaMatkul: `Kelas MK ${item.presensi_dosen.id_kelas_mk}`, // placeholder
