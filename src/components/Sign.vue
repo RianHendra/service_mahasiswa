@@ -100,7 +100,7 @@ export default {
 
   try {
     const response = await axios.post('https://ti054d01.agussbn.my.id/api/login', {
-      usernamae: this.username, // sesuai dokumentasi
+      username: this.username, // sesuai dokumentasi
       password: this.password
     })
 
