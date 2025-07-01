@@ -440,32 +440,34 @@ export default {
       }
     },
     async updateProfil() {
-      const nim = localStorage.getItem('UserNim')
-      try {
-        const payload = {
-          nama_mhs: this.namaMhs,
-          email: this.emailMhs,
-          handphone: this.handphone,
-        }
+  try {
+    const nim = this.nimMhs; // atau ambil dari localStorage
+    const payload = {
+      nama_mhs: this.namaMhs,
+      email: this.emailMhs,
+      handphone: this.handphone
+    };
 
-        const res = await axios.put(`https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}`, payload)
+    const response = await axios.put(`https://ti054d03.agussbn.my.id/api/mahasiswa/${nim}`, payload);
+    console.log('Berhasil update:', response.data);
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Berhasil',
-          text: 'Profil berhasil diperbarui!',
-          timer: 2000,
-          showConfirmButton: false,
-        })
-      } catch (error) {
-        console.error('Gagal update:', error)
-        Swal.fire({
-          icon: 'error',
-          title: 'Gagal',
-          text: 'Gagal memperbarui data.',
-        })
-      }
-    }
+    Swal.fire({
+      icon: 'success',
+      title: 'Profil berhasil diperbarui!',
+      showConfirmButton: false,
+      timer: 2000
+    });
+
+  } catch (error) {
+    console.error('Gagal update:', error.response || error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal update data',
+      text: error.response?.data?.message || 'Terjadi kesalahan'
+    });
+  }
+}
+
   }
 }
 </script>
