@@ -90,7 +90,7 @@ export default {
       password: '',
       loading: false,
       errorMsg: '',
-      manualLoginActive: true // nanti ganti ke false kalau pakai API asli
+      manualLoginActive: false // nanti ganti ke false kalau pakai API asli
     }
   },
   methods: {
