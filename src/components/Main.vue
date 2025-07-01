@@ -253,13 +253,6 @@
                           v-if="kelas.statusMahasiswa === 'hadir'" class="badge badge-light-success fs-8 fw-bold my-2"> Hadir
                         </span>
                         <span
-                          v-if="kelas.statusMahasiswa === 'sakit'" class="badge badge-light-secondary fs-8 fw-bold my-2"> Sakit
-                        </span>
-                        <span
-                        <span
-                          v-if="kelas.statusMahasiswa === 'izin'" class="badge badge-light-warning fs-8 fw-bold my-2"> Izin
-                        </span>
-                        <span
                           v-else
                           class="badge badge-light-danger fs-8 fw-bold my-2">Alfa
                         </span>
@@ -408,7 +401,7 @@ export default {
       });
   },
   methods: {
-    async getKelasHariIni() {
+   async getKelasHariIni() {
   try {
     const nim = localStorage.getItem('nim')
     const res = await axios.get(`https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}/presensi-aktif`)
@@ -416,26 +409,24 @@ export default {
 
     const today = new Date().toISOString().split('T')[0]
 
-    const hariIni = dataPresensi.filter(item => item.presensi_dosen?.tgl_presesi === today)
+    const hariIni = dataPresensi.filter(item =>
+      item.presensi_dosen &&
+      item.presensi_dosen.tgl_presesi === today &&
+      item.presensi_dosen.status_presensi_dosen === "1"
+    )
 
-    const kelasList = await Promise.all(hariIni.map(async (item) => {
-      const resDetail = await axios.get(`https://ti054d01.agussbn.my.id/api/jadwal-mahasiswa/${item.id_kelas_master}`)
-      const detail = resDetail.data
-
-      return {
-        id_kelas_mk: item.presensi_dosen?.id_kelas_mk,
-        namaMatkul: detail.kurikulum?.mata_kuliah?.nama_mk || 'Mata Kuliah',
-        alias: detail.kelas?.alias || '',
-        jam: item.presensi_dosen?.waktu_presensi || '08.00 – 09.40',
-        id_pegawai: detail.id_pegawai || '',
-        image: '/assets/media/stock/600x400/img-20.jpg',
-        statusKelas: 'dibuka',
-        statusMahasiswa: item.status_presensi_mhs === '1' ? 'hadir' : 'belum',
-        namaKelas: detail.kelas?.nama_kelas || '',
-      }
+    // Map data sederhana
+    this.daftarKelas = hariIni.map(item => ({
+      id_kelas_mk: item.presensi_dosen.id_kelas_mk,
+      namaMatkul: `Kelas MK ${item.presensi_dosen.id_kelas_mk}`, // placeholder
+      alias: '', // kosongkan dulu
+      jam: item.presensi_dosen.waktu_presensi || '08.00 – 09.40',
+      id_pegawai: '', // kosongkan dulu
+      image: '/assets/media/stock/600x400/img-20.jpg',
+      statusKelas: 'dibuka',
+      statusMahasiswa: item.status_presensi_mhs === '1' ? 'hadir' : 'belum',
+      namaKelas: ''
     }))
-
-    this.daftarKelas = kelasList
   } catch (err) {
     console.error('Gagal ambil data kelas hari ini:', err)
   }
