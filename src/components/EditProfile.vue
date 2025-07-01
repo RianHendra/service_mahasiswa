@@ -338,7 +338,7 @@
                                                     <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Lengkap</label>
                                                   
                                                         <div class="col-lg-8 fv-row">
-                                                          <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" v-model="namaMhs" />
+                                                          <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" v-model="formNamaMhs" />
                                                    
                                                     </div>
                                                   </div>
@@ -408,6 +408,7 @@ export default {
       nimMhs: '',
       emailMhs: '',
       fotoMhs: '',
+      formNamaMhs : '',
     }
   },
   mounted() {
@@ -431,6 +432,7 @@ export default {
         const data = res.data
 
         this.namaMhs = data.nama_mhs
+        this.formNamaMhs = data.nama_mhs
         this.nimMhs = data.nim
         this.emailMhs = data.email
         this.handphone = data.handphone
@@ -444,7 +446,7 @@ export default {
     const nim = localStorage.getItem('UserNim')
     const dataUpdate = {
       _method: 'PUT', // 👈 Ini kunci penting!
-      nama_mhs: this.namaMhs,
+      nama_mhs: this.formNamaMhs,
       email: this.emailMhs,
       handphone: this.handphone
     }
@@ -460,6 +462,7 @@ export default {
     )
 
     console.log('Berhasil update:', response.data)
+    this.namaMhs = this.formNamaMhs
     Swal.fire({
       icon: 'success',
       title: 'Profil berhasil diperbarui!',
