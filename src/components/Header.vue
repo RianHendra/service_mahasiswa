@@ -226,7 +226,7 @@ export default {
   methods: {
     async getProfilMahasiswa() {
       try {
-        const nim = localStorage.getItem('nim') // pastikan localStorage ini ada ya
+        const nim = localStorage.getItem('UserNim') // pastikan localStorage ini ada ya
         const res = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/${nim}`)
         const data = res.data
 
