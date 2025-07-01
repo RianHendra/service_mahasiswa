@@ -31,7 +31,7 @@
                                     <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
 										<!--begin:Menu link-->
 										<span class="menu-link">
-											<span class="menu-title">Halo, Selamat Datang Rafly</span>
+											<span class="menu-title">Halo, Selamat Datang {{ namaMhs }}</span>
 											<span class="menu-arrow d-lg-none"></span>
 										</span>
 										<!--end:Menu link-->
@@ -440,7 +440,7 @@ export default {
       }
     },
     async updateProfil() {
-      const nim = this.nimMhs
+      const nim = localStorage.getItem('UserNim')
       try {
         const payload = {
           nama_mhs: this.namaMhs,
