@@ -19,7 +19,7 @@
 						<!--begin::Mobile logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
 							<a href="dashboard.html" class="d-lg-none">
-								<img alt="Logo" src="../images/default_small_poliban.png" class="h-30px" />
+								<img alt="Logo" src="/default_small_poliban.png" class="h-30px" />
 							</a>
 						</div>
 						<!--end::Mobile logo-->
@@ -137,8 +137,8 @@
 						<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 							<!--begin::Logo image-->
 							<a href="dashboard.html">
-								<img alt="Logo" src="../images/default_dark_poliban.png" class="h-25px app-sidebar-logo-default" />
-								<img alt="Logo" src="../images/default_small_poliban.png" class="h-20px app-sidebar-logo-minimize" />
+								<img alt="Logo" src="/default_dark_poliban.png" class="h-25px app-sidebar-logo-default" />
+								<img alt="Logo" src="/default_small_poliban.png" class="h-20px app-sidebar-logo-minimize" />
 							</a>
 							<!--end::Logo image-->
 							<!--begin::Sidebar toggle-->
