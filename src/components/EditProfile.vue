@@ -448,7 +448,7 @@ export default {
       handphone: this.handphone
     }
 
-    const response = await axios.put(
+    const response = await axios.patch(
       `https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}`,
       payload,
       {
