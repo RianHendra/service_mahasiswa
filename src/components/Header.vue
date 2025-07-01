@@ -105,10 +105,6 @@
                   <div class="d-flex flex-column">
                     <div class="fw-bold d-flex align-items-center fs-5">
                       {{ namaMhs }}
-                      <span
-                        class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2"
-                        >Pro</span
-                      >
                     </div>
                     <a
                       href="#"
@@ -129,7 +125,7 @@
                 </div>
 
               <!--begin::Menu item-->
-              <div class="menu-item px-5">
+             <div class="menu-item px-5">
 											<a @click="logout" class="menu-link px-5">Logout</a>
 										</div>
               <!--end::Menu item-->
@@ -222,7 +218,7 @@ export default {
     localStorage.removeItem('authToken')
     localStorage.removeItem('userEmail')
     localStorage.removeItem('userRole')
-    localStorage.removeItem('UserNim')
+    localStorage.removeItem('nim')
     localStorage.removeItem('loggedIn')
 
     this.$router.push('/')
@@ -239,6 +235,7 @@ export default {
             this.$router.push('/')
           }, 2000)
   }
+  
   
 }
 
