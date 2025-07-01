@@ -152,7 +152,7 @@
                                         
 										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 											<!--begin:Menu link-->
-                                              <router-link to="/dashboard">
+                                        
 											<span class="menu-link">
                                               
 												<span class="menu-icon">
@@ -165,7 +165,6 @@
 												</span>
 												<span class="menu-title">Dashboard</span>
 											</span>
-                                           </router-link>
 											<!--end:Menu link-->
 										</div>
                                          
