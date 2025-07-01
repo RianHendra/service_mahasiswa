@@ -130,11 +130,9 @@
 
               <!--begin::Menu item-->
               <div class="menu-item px-5">
-                <a
-                  href="#"
-                  class="menu-link px-5"
-                  >Logout</a
-                >
+                <button @click="logout" class="btn btn-danger">
+                    Logout
+                  </button>
               </div>
               <!--end::Menu item-->
             </div>
@@ -220,7 +218,28 @@ export default {
       } catch (err) {
         console.error('Gagal ambil data profil mahasiswa:', err)
       }
-    }
+    },
+    methods: {
+  logout() {
+    localStorage.removeItem('authToken')
+    localStorage.removeItem('userEmail')
+    localStorage.removeItem('userRole')
+    localStorage.removeItem('nim')
+    localStorage.removeItem('loggedIn')
+
+    this.$router.push('/')
+
+    this.$nextTick(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil Logout',
+        timer: 1500,
+        showConfirmButton: false
+      })
+    })
+  }
+}
+
   }
 }
 </script>

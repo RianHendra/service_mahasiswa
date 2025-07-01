@@ -429,9 +429,23 @@ export default {
     },
 
     logout() {
-      localStorage.removeItem('loggedIn')
-      this.$router.push('/')
-    },
+    localStorage.removeItem('authToken')
+    localStorage.removeItem('userEmail')
+    localStorage.removeItem('userRole')
+    localStorage.removeItem('nim')
+    localStorage.removeItem('loggedIn')
+
+    this.$router.push('/login')
+
+    this.$nextTick(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil Logout',
+        timer: 1500,
+        showConfirmButton: false
+      })
+    })
+  },
     getImageUrl(filename) {
       return `http://192.168.74.105:8000/storage/${filename}`;
     },
