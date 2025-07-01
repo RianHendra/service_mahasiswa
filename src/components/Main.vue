@@ -403,7 +403,7 @@ export default {
   methods: {
     async getDataKelas() {
       try {
-        const response = await axios.get('http://ti054d01.agussbn.my.id/api/presensi/matkul-dosen/2');
+        const response = await axios.get('https://ti054d01.agussbn.my.id/api/presensi/matkul-dosen/');
         const dataAPI = response.data;
 
       
