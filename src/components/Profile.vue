@@ -18,9 +18,10 @@
 						<!--end::Sidebar mobile toggle-->
 						<!--begin::Mobile logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-							<a href="dashboard.html" class="d-lg-none">
-								<img alt="Logo" src="/default_small_poliban.png" class="h-30px" />
-							</a>
+							<router-link to="/dashboard" class="d-lg-none">
+                                <img alt="Logo" src="/default_small_poliban.png" class="h-30px" />
+                                </router-link>
+
 						</div>
 						<!--end::Mobile logo-->
 						<!--begin::Header wrapper-->
@@ -121,10 +122,10 @@
 						<!--begin::Logo-->
 						<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 							<!--begin::Logo image-->
-							<a href="#/dashboard">
+							<router-link to="/dashboard">
 								<img alt="Logo" src="/default_dark_poliban.png" class="h-25px app-sidebar-logo-default" />
 								<img alt="Logo" src="/default_small_poliban.png" class="h-20px app-sidebar-logo-minimize" />
-							</a>
+							</router-link>
 							<!--end::Logo image-->
 							<!--begin::Sidebar toggle-->
 							<!--begin::Minimized sidebar setup:   -->
