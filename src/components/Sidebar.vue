@@ -14,7 +14,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
       <!--begin::Logo image-->
-      <a href="index.html">
+      <router-link to="/dashboard">
         <img
           alt="Logo"
           src="/default_dark_poliban.png"
@@ -25,7 +25,7 @@
           src="/default_small_poliban.png"
           class="h-20px app-sidebar-logo-minimize"
         />
-      </a>
+      </router-link>
       <!--end::Logo image-->
       <!--begin::Sidebar toggle-->
       <!--begin::Minimized sidebar setup:   -->

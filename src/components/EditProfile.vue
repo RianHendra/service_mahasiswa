@@ -18,10 +18,9 @@
 						<!--end::Sidebar mobile toggle-->
 						<!--begin::Mobile logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-							<router-link to="/dashboard" class="d-lg-none">
-                                <img alt="Logo" src="/default_small_poliban.png" class="h-30px" />
-                                </router-link>
-
+							<a href="db_admin.html" class="d-lg-none">
+								<img alt="Logo" src="../images/default_small_poliban.png" class="h-30px" />
+							</a>
 						</div>
 						<!--end::Mobile logo-->
 						<!--begin::Header wrapper-->
@@ -32,7 +31,7 @@
                                     <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
 										<!--begin:Menu link-->
 										<span class="menu-link">
-											<span class="menu-title">Halo, Selamat Datang  {{ namaMhs }} </span>
+											<span class="menu-title">Halo, Selamat Datang Rafly</span>
 											<span class="menu-arrow d-lg-none"></span>
 										</span>
 										<!--end:Menu link-->
@@ -47,7 +46,7 @@
 								<div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
 									<!--begin::Menu wrapper-->
 									<div class="cursor-pointer symbol symbol-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-										<img src="/rafly.png" class="rounded-3" alt="user" />
+										<img src="../images/logo_poliban.png" class="rounded-3" alt="user" />
 									</div>
 									<!--begin::User account menu-->
 									<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -56,14 +55,14 @@
 											<div class="menu-content d-flex align-items-center px-3">
 												<!--begin::Avatar-->
 												<div class="symbol symbol-50px me-5">
-													<img alt="Logo" src="/rafly.png" />
+													<img alt="Logo" src="../images/rafly.png" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Username-->
 												<div class="d-flex flex-column">
-													<div class="fw-bold d-flex align-items-center fs-5">{{ namaMhs }}
-													</div>
-													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ emailMhs }}</a>
+													<div class="fw-bold d-flex align-items-center fs-5">Muhammad Rafly Adriazka
+													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
+													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">raflyadriazka@gmail.com</a>
 												</div>
 												<!--end::Username-->
 											</div>
@@ -74,8 +73,11 @@
 										<!--end::Menu separator-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="#" class="menu-link px-5">Profil</a>
+											<a href="profile-admin.html" class="menu-link px-5">Profil</a>
 										</div>
+										<!--end::Menu item-->
+										
+										<!--end::Menu item-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
 											<a href="#" class="menu-link px-5">Logout</a>
@@ -122,10 +124,10 @@
 						<!--begin::Logo-->
 						<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 							<!--begin::Logo image-->
-							<router-link to="/dashboard">
-								<img alt="Logo" src="/default_dark_poliban.png" class="h-25px app-sidebar-logo-default" />
-								<img alt="Logo" src="/default_small_poliban.png" class="h-20px app-sidebar-logo-minimize" />
-							</router-link>
+							<a href="dashboard.html">
+								<img alt="Logo" src="../images/default_dark_poliban.png" class="h-25px app-sidebar-logo-default" />
+								<img alt="Logo" src="../images/default_small_poliban.png" class="h-20px app-sidebar-logo-minimize" />
+							</a>
 							<!--end::Logo image-->
 							<!--begin::Sidebar toggle-->
 							<!--begin::Minimized sidebar setup:   -->
@@ -265,7 +267,7 @@
 									<!--begin::Page title-->
 									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 										<!--begin::Title-->
-										<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">Detail Mahasiswa</h1>
+										<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">Pengaturan Mahasiswa</h1>
 										<!--end::Title-->
 										<!--begin::Breadcrumb-->
 										<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -286,146 +288,154 @@
 							<div id="kt_app_content" class="app-content flex-column-fluid">
 								<!--begin::Content container-->
 								<div id="kt_app_content_container" class="app-container container-xxl">
-									<!--begin::Navbar-->
+								
+									<!--begin::Basic info-->
 									<div class="card mb-5 mb-xl-10">
-										<div class="card-body pt-9 pb-0">
-											<!--begin::Details-->
-											<div class="d-flex flex-wrap flex-sm-nowrap">
-												<!--begin: Pic-->
-												<div class="me-7 mb-4">
-													<div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-														<img src="/rafly.png" alt="image" />
-														<div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div>
-													</div>
-												</div>
-												<!--end::Pic-->
-												<!--begin::Info-->
-												<div class="flex-grow-1">
-													<!--begin::Title-->
-													<div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
-														<!--begin::User-->
-														<div class="d-flex flex-column">
-															<!--begin::Name-->
-															<div class="d-flex align-items-center mb-2">
-																<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ namaMhs }}</a>
-																<a href="#">
-																	<i class="ki-duotone ki-verify fs-1 text-primary">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</a>
-															</div>
-															<!--end::Name-->
-															<!--begin::Info-->
-															<div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
-																<a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
-																<i class="ki-duotone ki-sms fs-4">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																</i>{{ emailMhs }}</a>
-															</div>
-															<!--end::Info-->
-														</div>
-														<!--end::User-->
-													</div>
-													<!--end::Title-->
-												</div>
-												<!--end::Info-->
-											</div>
-											<!--end::Details-->
-											<!--begin::Navs-->
-											<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
-												<!--begin::Nav item-->
-												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#">Profile</a>
-												</li>
-												<!--end::Nav item-->
-												
-
-												
-												<!--begin::Nav item-->
-												
-												<!--end::Nav item-->
-												
-											</ul>
-											<!--begin::Navs-->
-										</div>
-									</div>
-									<!--end::Navbar-->
-									<!--begin::details View-->
-									<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
 										<!--begin::Card header-->
-										<div class="card-header cursor-pointer">
+										<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
 											<!--begin::Card title-->
 											<div class="card-title m-0">
 												<h3 class="fw-bold m-0">Profile Details</h3>
 											</div>
 											<!--end::Card title-->
-											<!--begin::Action-->
-											<router-link to="/edit-profil" class="btn btn-sm btn-primary align-self-center">Edit Profile</router-link>
-											<!--end::Action-->
 										</div>
 										<!--begin::Card header-->
-										<!--begin::Card body-->
-										<div class="card-body p-9">
-											<!--begin::Row-->
-											<div class="row mb-7">
-												<!--begin::Label-->
-												<label class="col-lg-4 fw-semibold text-muted">Nama Lengkap</label>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-8">
-													<span class="fw-bold fs-6 text-gray-800">{{ namaMhs }}</span>
-												</div>
-												<!--end::Col-->
-											</div>
-											<!--end::Row-->
-											<!--begin::Input group-->
-											<div class="row mb-7">
-												<!--begin::Label-->
-												<label class="col-lg-4 fw-semibold text-muted">NIM</label>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-8 fv-row">
-													<span class="fw-semibold text-gray-800 fs-6">{{ nimMhs }}</span>
-												</div>
-												<!--end::Col-->
-											</div>
-											<!--end::Input group-->
-											<!--begin::Input group-->
-											<div class="row mb-7">
-												<!--begin::Label-->
-												<label class="col-lg-4 fw-semibold text-muted">No. HP/WA 
-												<span class="ms-1" data-bs-toggle="tooltip" title="Phone number must be active">
-													<i class="ki-duotone ki-information fs-7">
-														<span class="path1"></span>
-														<span class="path2"></span>
-														<span class="path3"></span>
-													</i>
-												</span></label>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-8 d-flex align-items-center">
-													<span class="fw-bold fs-6 text-gray-800 me-2">{{ handphone }}</span>
-													<span class="badge badge-success">Terverifikasi</span>
-												</div>
-												<!--end::Col-->
-											</div>
-											<!--end::Input group-->
-											<!--begin::Input group-->
-											<!--end::Input group-->
-										
-											<!--end::Notice-->
+										<!--begin::Content-->
+										<div id="kt_account_settings_profile_details" class="collapse show">
+											<!--begin::Form-->
+											<form id="kt_account_profile_details_form" class="form">
+                                                <!--begin::Card body-->
+                                                <div class="card-body border-top p-9">
+                                                  <!-- Foto -->
+                                                  <div class="row mb-6">
+                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Foto</label>
+                                                    <div class="col-lg-8">
+                                                      <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('../images/rafly.png')">
+                                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url(../images/rafly.png)"></div>
+                                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                                          <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
+                                                          <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                                          <input type="hidden" name="avatar_remove" />
+                                                        </label>
+                                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                                          <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
+                                                        </span>
+                                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                                          <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
+                                                        </span>
+                                                      </div>
+                                                      <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                                    </div>
+                                                  </div>
+												   <!-- NIM -->
+                                                  <div class="row mb-6">
+                                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">NIM</label>
+                                                    <div class="col-lg-8 fv-row">
+                                                      <input type="text" name="nim" disabled class="form-control form-control-lg form-control-solid" placeholder="NIM" value="C030323118" />
+                                                    </div>
+                                                  </div>
+                                                  <!-- Nama Lengkap -->
+                                                  <div class="row mb-6">
+                                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Lengkap</label>
+                                                  
+                                                        <div class="col-lg-8 fv-row">
+                                                          <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="Muhammad Rafly Adriazka" />
+                                                   
+                                                    </div>
+                                                  </div>
+                                                  <!-- Email -->
+													<div class="row mb-6">
+													<label class="col-lg-4 col-form-label required fw-semibold fs-6">Email</label>
+													<div class="col-lg-8 fv-row">
+														<input type="email" name="email" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="raplyadriazka@gmail.com" />
+													</div>
+													</div>
+
+													<!-- Jenis Kelamin -->
+													<div class="row mb-6">
+													<label class="col-lg-4 col-form-label required fw-semibold fs-6">Jenis Kelamin</label>
+													<div class="col-lg-8 fv-row">
+														<select name="jenis_kelamin" class="form-select form-select-lg form-select-solid">
+														<option value="">-- Pilih Jenis Kelamin --</option>
+														<option value="Laki-laki" selected>Laki-laki</option>
+														<option value="Perempuan">Perempuan</option>
+														</select>
+													</div>
+													</div>
+
+                                                 
+                                                  <!-- No HP/WA -->
+                                                  <div class="row mb-6">
+                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                                      <span class="required">No. HP/WA</span>
+                                                      <span class="ms-1" data-bs-toggle="tooltip" title="Phone number must be active">
+                                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                                          <span class="path1"></span><span class="path2"></span><span class="path3"></span>
+                                                        </i>
+                                                      </span>
+                                                    </label>
+                                                    <div class="col-lg-8 fv-row">
+                                                      <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="0877 1655 5618" />
+                                                    </div>
+                                                  </div>
+                                                  <!-- Prodi -->
+                                                  <div class="row mb-6">
+                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Prodi</label>
+                                                    <div class="col-lg-8 fv-row">
+                                                      <input type="text" name="prodi" class="form-control form-control-lg form-control-solid" placeholder="Program Studi" value="Teknik Informatika" />
+                                                    </div>
+                                                  </div>
+                                                  <!-- Semester -->
+                                                  <div class="row mb-6">
+                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Semester</label>
+                                                    <div class="col-lg-8 fv-row">
+                                                      <input type="number" name="semester" class="form-control form-control-lg form-control-solid" placeholder="Semester" value="5" min="1" max="14" />
+                                                    </div>
+                                                  </div>
+                                                  <!-- Tahun Lulus -->
+                                                  <div class="row mb-6">
+                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Tahun Masuk</label>
+                                                    <div class="col-lg-8 fv-row">
+                                                      <input type="number" name="tahun_masuk" class="form-control form-control-lg form-control-solid" placeholder="Tahun Masuk" value="2023" min="1900" max="2100" />
+                                                    </div>
+                                                  </div>
+                                                  <!-- Kelas -->
+                                                  <div class="row mb-6">
+                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Kelas</label>
+                                                    <div class="col-lg-8 fv-row">
+                                                      <input type="text" name="kelas" class="form-control form-control-lg form-control-solid" placeholder="Kelas" value="TI-3A" />
+                                                    </div>
+                                                  </div>
+                                                  <!-- Jurusan -->
+                                                  <div class="row mb-6">
+                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Jurusan</label>
+                                                    <div class="col-lg-8 fv-row">
+                                                      <input type="text" name="jurusan" class="form-control form-control-lg form-control-solid" placeholder="Jurusan" value="Teknik Informatika" />
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <!--end::Card body-->
+                                                <!--begin::Actions-->
+                                                <div class="card-footer d-flex justify-content-end py-6 px-9">
+												  <a href="profile_mhs.html" class="btn btn-light btn-active-light-primary me-2">Kembali</a>
+                                                  <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Simpan Perubahan</button>
+                                                </div>
+                                                <!--end::Actions-->
+                                              </form>
+                                              
+                                              
+											<!--end::Form-->
 										</div>
-										<!--end::Card body-->
+										<!--end::Content-->
 									</div>
-									<!--end::details View-->
+									<!--end::Basic info-->
 								</div>
 								<!--end::Content container-->
 							</div>
 							<!--end::Content-->
 						</div>
 						<!--end::Content wrapper-->
+						<!--begin::Footer-->
 					</div>
 					<!--end:::Main-->
 					<!--begin::aside-->
