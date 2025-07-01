@@ -82,6 +82,8 @@
 </template>
 <script>
 	import axios from 'axios'
+	import Swal from 'sweetalert2'
+
 export default {
   name: 'Sign',
   data() {
@@ -111,8 +113,18 @@ export default {
           localStorage.setItem('userEmail', result.user?.email || '')
           localStorage.setItem('userRole', result.user?.role || '')
           localStorage.setItem('loggedIn', 'true')
-          console.log('Redirecting ke dashboard...')
-          this.$router.push('/dashboard')
+          Swal.fire({
+					icon: 'success',
+					title: 'Berhasil Login',
+					text: 'Selamat datang kembali!',
+					timer: 2000,
+					showConfirmButton: false
+				})
+
+				// Tunggu 2 detik baru redirect ke dashboard
+				setTimeout(() => {
+					this.$router.push('/dashboard')
+				}, 2000)
         } else {
           this.errorMsg = result.message || 'Login gagal.'
         }
