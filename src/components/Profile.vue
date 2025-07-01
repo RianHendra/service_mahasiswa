@@ -149,10 +149,11 @@
 									<!--begin::Menu-->
 									<div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
 										<!--begin:Menu item-->
+                                          <router-link to="/dashboard">
 										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 											<!--begin:Menu link-->
 											<span class="menu-link">
-                                                <router-link to="/dashboard">
+                                              
 												<span class="menu-icon">
 													<i class="ki-duotone ki-element-11 fs-2">
 														<span class="path1"></span>
@@ -162,11 +163,12 @@
 													</i>
 												</span>
 												<span class="menu-title">Dashboard</span>
-                                                 </router-link>
+                                                
 											</span>
                                            
 											<!--end:Menu link-->
 										</div>
+                                         </router-link>
 										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 											<!--begin:Menu link-->
 											<span class="menu-link">
