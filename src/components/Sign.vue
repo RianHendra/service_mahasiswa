@@ -1,5 +1,5 @@
 <template>
-	<body id="kt_body" class="app-blank">
+
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root min-h-100vh" id="kt_app_root">
 			<!--begin::Authentication - Sign-in -->
@@ -76,7 +76,7 @@
 			<!--end::Authentication - Sign-in-->
 		</div>
 		
-	</body>
+
 	
 
 </template>
