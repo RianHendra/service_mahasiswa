@@ -81,8 +81,8 @@
 
 </template>
 <script>
-	import axios from 'axios'
-	import Swal from 'sweetalert2'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'Sign',
@@ -101,7 +101,7 @@ export default {
 
       try {
         const response = await axios.post('https://ti054d01.agussbn.my.id/api/login', {
-          username: this.username, // pakai login jika dokumentasi awal pakai ini
+          username: this.username,
           password: this.password
         })
 
@@ -113,45 +113,47 @@ export default {
           localStorage.setItem('userEmail', result.user?.email || '')
           localStorage.setItem('userRole', result.user?.role || '')
           localStorage.setItem('loggedIn', 'true')
-          Swal.fire({
-					icon: 'success',
-					title: 'Berhasil Login',
-					text: 'Selamat datang kembali!',
-					timer: 2000,
-					showConfirmButton: false
-				})
 
-				// Tunggu 2 detik baru redirect ke dashboard
-				setTimeout(() => {
-					this.$router.push('/dashboard')
-				}, 2000)
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil Login',
+            text: 'Selamat datang kembali!',
+            timer: 2000,
+            showConfirmButton: false
+          })
+
+          setTimeout(() => {
+            this.$router.push('/dashboard')
+          }, 2000)
         } else {
-         Swal.fire({
-				icon: 'error',
-				title: 'Gagal Login',
-				text: result.message || 'Username atau password salah.'
-				})
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal Login',
+            text: result.message || 'Username atau password salah.'
+          })
         }
       } catch (error) {
         if (error.response) {
           console.error('Response error:', error.response.data)
-          this.errorMsg = error.response.data.message || 'Login gagal.'
-		  
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal Login',
+            text: error.response.data.message || 'Login gagal.'
+          })
         } else if (error.request) {
           console.error('No response:', error.request)
-		   Swal.fire({
-				icon: 'error',
-				title: 'Gagal Login',
-				text: result.message || 'Tidak ada respon dari server.'
-				})
-        
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal Login',
+            text: 'Tidak ada respon dari server.'
+          })
         } else {
           console.error('Error:', error.message)
-		  Swal.fire({
-				icon: 'error',
-				title: 'Gagal Login',
-				text: result.message || 'Terjadi kesalahan saat login.'
-				})
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal Login',
+            text: 'Terjadi kesalahan saat login.'
+          })
         }
       }
 
@@ -159,6 +161,7 @@ export default {
     }
   }
 }
+
 
 </script>
 
