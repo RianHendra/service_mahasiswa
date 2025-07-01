@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Sign from '../components/Sign.vue'
 import Dashboard from '../views/Dashboard.vue'
+import Profil from '../components/Profile.vue'
 
 const routes = [
   {
@@ -13,6 +14,12 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     meta: { requiresAuth: true } // ini tandanya halaman ini butuh login
+  },
+  {
+    path: '/profil',
+    name: 'Profil',
+    component: Profil,
+    meta: { requiresAuth: true }
   }
 ]
 

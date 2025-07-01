@@ -129,36 +129,13 @@
               <!--end::Menu separator-->
               <!--begin::Menu item-->
               <div class="menu-item px-5">
-                <a href="account/overview.html" class="menu-link px-5"
-                  >Profil</a
-                >
-              </div>
-              <!--end::Menu item-->
-              <!--begin::Menu item-->
-              <div class="menu-item px-5">
-                <a href="apps/projects/list.html" class="menu-link px-5">
-                  <span class="menu-text">Tugas</span>
-                  <span class="menu-badge">
-                    <span
-                      class="badge badge-light-danger badge-circle fw-bold fs-7"
-                      >3</span
-                    >
-                  </span>
-                </a>
-              </div>
-              <!--end::Menu item-->
+                  <router-link to="/profil" class="menu-link px-5">Profil</router-link>
+                </div>
 
-              <!--begin::Menu item-->
-              <div class="menu-item px-5 my-1">
-                <a href="account/settings.html" class="menu-link px-5"
-                  >Pengaturan Akun</a
-                >
-              </div>
-              <!--end::Menu item-->
               <!--begin::Menu item-->
               <div class="menu-item px-5">
                 <a
-                  href="authentication/layouts/corporate/sign-in.html"
+                  href="#"
                   class="menu-link px-5"
                   >Logout</a
                 >
