@@ -450,7 +450,7 @@ export default {
     }
 
     const response = await axios.post(
-      `https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}`,
+      `https://ti054d03.agussbn.my.id/api/mahasiswa/${nim}`,
       dataUpdate,
       {
         headers: {
