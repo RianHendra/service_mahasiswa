@@ -406,6 +406,7 @@ export default {
     const nim = localStorage.getItem('UserNim')
     const res = await axios.get(`https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}/presensi-aktif`)
     const dataPresensi = res.data
+    console.log(dataPresensi)
 
     const today = new Date().toISOString().split('T')[0]
 
