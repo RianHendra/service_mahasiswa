@@ -78,7 +78,7 @@
 										</div>
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<button @click="logout" class="menu-link px-5">Logout</button>
+											<a @click="logout" class="menu-link px-5">Logout</a>
 										</div>
 										<!--end::Menu item-->
 									</div>
@@ -487,7 +487,7 @@ export default {
     localStorage.removeItem('UserNim')
     localStorage.removeItem('loggedIn')
 
-    this.$router.push('/')
+    
 
     this.$nextTick(() => {
       Swal.fire({
@@ -497,6 +497,10 @@ export default {
         showConfirmButton: false
       })
     })
+        setTimeout(() => {
+            this.$router.push('/')
+          }, 2000)
+
   }
   }
 }
