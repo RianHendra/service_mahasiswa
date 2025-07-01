@@ -73,23 +73,8 @@
 										<!--end::Menu separator-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="profile_mhs.html" class="menu-link px-5">Profil</a>
+											<a href="#" class="menu-link px-5">Profil</a>
 										</div>
-										<!--end::Menu item-->
-										<!--begin::Menu item-->
-										<div class="menu-item px-5">
-											<a href="apps/projects/list.html" class="menu-link px-5">
-												<span class="menu-text">Tugas</span>
-												<span class="menu-badge">
-													<span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
-												</span>
-											</a>
-										</div>
-										<!--end::Menu item-->
-										
-										<!--begin::Menu item-->
-										
-										<!--end::Menu item-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
 											<a href="#" class="menu-link px-5">Logout</a>
@@ -136,7 +121,7 @@
 						<!--begin::Logo-->
 						<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 							<!--begin::Logo image-->
-							<a href="dashboard.html">
+							<a href="#/dashboard">
 								<img alt="Logo" src="/default_dark_poliban.png" class="h-25px app-sidebar-logo-default" />
 								<img alt="Logo" src="/default_small_poliban.png" class="h-20px app-sidebar-logo-minimize" />
 							</a>
