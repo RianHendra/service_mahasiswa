@@ -414,7 +414,7 @@ export default {
     const hariIni = dataPresensi.filter(item => {
       const idMk = item.presensi_dosen?.id_kelas_mk
       const isToday = item.presensi_dosen?.tgl_presesi === today
-      const isOpen = item.presensi_dosen?.status_presensi_dosen === "2"
+      const isOpen = item.presensi_dosen?.status_presensi_dosen === "1"
       if (idMk && isToday && isOpen && !seen.has(idMk)) {
         seen.add(idMk)
         return true
