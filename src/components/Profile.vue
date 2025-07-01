@@ -484,10 +484,10 @@ export default {
     localStorage.removeItem('authToken')
     localStorage.removeItem('userEmail')
     localStorage.removeItem('userRole')
-    localStorage.removeItem('UserNim')
+    localStorage.removeItem('nim')
     localStorage.removeItem('loggedIn')
 
-    
+    this.$router.push('/')
 
     this.$nextTick(() => {
       Swal.fire({
@@ -497,10 +497,9 @@ export default {
         showConfirmButton: false
       })
     })
-        setTimeout(() => {
+    setTimeout(() => {
             this.$router.push('/')
           }, 2000)
-
   }
   }
 }
