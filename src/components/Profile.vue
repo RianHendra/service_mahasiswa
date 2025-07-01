@@ -153,8 +153,7 @@
 										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 											<!--begin:Menu link-->
                                         
-											<span class="menu-link">
-                                              
+											<router-link to="/dashboard" class="menu-link">
 												<span class="menu-icon">
 													<i class="ki-duotone ki-element-11 fs-2">
 														<span class="path1"></span>
@@ -164,7 +163,7 @@
 													</i>
 												</span>
 												<span class="menu-title">Dashboard</span>
-											</span>
+											</router-link>
 											<!--end:Menu link-->
 										</div>
                                          
