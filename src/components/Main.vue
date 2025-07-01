@@ -253,6 +253,13 @@
                           v-if="kelas.statusMahasiswa === 'hadir'" class="badge badge-light-success fs-8 fw-bold my-2"> Hadir
                         </span>
                         <span
+                          v-if="kelas.statusMahasiswa === 'sakit'" class="badge badge-light-secondary fs-8 fw-bold my-2"> Sakit
+                        </span>
+                        <span
+                        <span
+                          v-if="kelas.statusMahasiswa === 'izin'" class="badge badge-light-warning fs-8 fw-bold my-2"> Izin
+                        </span>
+                        <span
                           v-else
                           class="badge badge-light-danger fs-8 fw-bold my-2">Alfa
                         </span>
@@ -371,7 +378,7 @@ export default {
       pengumuman: [],
       isExpanded: false,
       maxLength: 200,
-      daftarKelas: [],
+       daftarKelas: [],
       loadingIndex: null,
     };
   },
@@ -389,7 +396,7 @@ export default {
     },
   },
   mounted() {
-    this.getDataKelas();
+   this.getKelasHariIni()
     axios
       .get('http://36.91.27.150:818/api/pengumuman')
       .then((response) => {
@@ -401,54 +408,58 @@ export default {
       });
   },
   methods: {
-    async getDataKelas() {
-      try {
-        const response = await axios.get('https://ti054d01.agussbn.my.id/api/presensi/matkul-dosen/');
-        const dataAPI = response.data;
+    async getKelasHariIni() {
+    try {
+      const nim = localStorage.getItem('nim')
+      const res = await axios.get(`https://ti054d01.agussbn.my.id/api/mahasiswa/${nim}/presensi-aktif`)
+      const dataPresensi = res.data
 
-      
-       this.daftarKelas = dataAPI.map(item => ({
-        id_kelas_mk: item.id_kelas_mk,
-        id_kelas: item.id_kelas,
-        id_pegawai: item.id_pegawai,
-        id_mk: item.kurikulum?.mata_kuliah?.id_mk,
-        namaMatkul: item.kurikulum?.mata_kuliah?.nama_mk,
-        alias: item.kelas?.alias,
-        image: '/assets/media/stock/600x400/img-20.jpg',
-        jam: '08.00 – 09.40',
-        statusKelas: 'dibuka',
-        statusMahasiswa: 'belum',
-        namaKelas: item.kelas?.nama_kelas
-      }));
+      const today = new Date().toISOString().split('T')[0]
 
+      // Filter hanya presensi hari ini
+      const hariIni = dataPresensi.filter(item => item.presensi_dosen?.tgl_presesi === today)
 
-      } catch (error) {
-        console.error('Gagal ambil data kelas:', error);
-      }
-      
-    },
+      const kelasList = await Promise.all(hariIni.map(async (item) => {
+        const idKelasMk = item.presensi_dosen?.id_kelas_mk
+        const resDetail = await axios.get(`https://ti054d01.agussbn.my.id/api/kelas-mk/${idKelasMk}`)
 
-    logout() {
-    localStorage.removeItem('authToken')
-    localStorage.removeItem('userEmail')
-    localStorage.removeItem('userRole')
-    localStorage.removeItem('nim')
-    localStorage.removeItem('loggedIn')
+        const detail = resDetail.data
 
-    this.$router.push('/login')
+        return {
+          id_kelas_mk: idKelasMk,
+          namaMatkul: detail.kurikulum?.mata_kuliah?.nama_mk || 'Mata Kuliah',
+          alias: detail.kelas?.alias || '',
+          jam: item.presensi_dosen?.waktu_presensi || '08.00 – 09.40',
+          id_pegawai: detail.id_pegawai || '',
+          image: '/assets/media/stock/600x400/img-20.jpg',
+          statusKelas: 'dibuka',
+          statusMahasiswa: item.status_presensi_mhs === '1' ? 'hadir' : 'belum',
+          namaKelas: detail.kelas?.nama_kelas || '',
+        }
+      }))
 
-    this.$nextTick(() => {
+      this.daftarKelas = kelasList
+    } catch (err) {
+      console.error('Gagal ambil data kelas hari ini:', err)
+    }
+  },
+
+  klikHadir(index) {
+    this.loadingIndex = index
+    setTimeout(() => {
+      this.daftarKelas[index].statusMahasiswa = 'hadir'
+      this.loadingIndex = null
+
       Swal.fire({
         icon: 'success',
-        title: 'Berhasil Logout',
-        timer: 1500,
-        showConfirmButton: false
+        title: 'Kehadiran tercatat!',
+        text: `Anda telah hadir di kelas ${this.daftarKelas[index].namaMatkul}.`,
+        showConfirmButton: false,
+        timer: 2000,
+        position: 'center',
       })
-    })
+    }, 1500)
   },
-    getImageUrl(filename) {
-      return `http://192.168.74.105:8000/storage/${filename}`;
-    },
     toggleExpanded() {
       this.isExpanded = !this.isExpanded;
     },
@@ -458,25 +469,7 @@ export default {
         return text.slice(0, this.maxLength) + '... ';
       }
       return text;
-    },
-    klikHadir(index) {
-  this.loadingIndex = index;
-
-  // simulasi delay 1.5 detik (kayak proses loading)
-      setTimeout(() => {
-        this.daftarKelas[index].statusMahasiswa = 'hadir';
-        this.loadingIndex = null;
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Kehadiran tercatat!',
-          text: `Anda telah hadir di kelas ${this.daftarKelas[index].namaMatkul}.`,
-          showConfirmButton: false,
-          timer: 2000,
-          position: 'center',
-        });
-      }, 1500);
-    },
+    }
   },
 };
 </script>
