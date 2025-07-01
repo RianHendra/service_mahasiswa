@@ -18,9 +18,9 @@
 						<!--end::Sidebar mobile toggle-->
 						<!--begin::Mobile logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-							<a href="db_admin.html" class="d-lg-none">
+							<router-link to="/dashboard" class="d-lg-none">
 								<img alt="Logo" src="/default_small_poliban.png" class="h-30px" />
-							</a>
+							</router-link>
 						</div>
 						<!--end::Mobile logo-->
 						<!--begin::Header wrapper-->
@@ -72,7 +72,7 @@
 										<!--end::Menu separator-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="profile-admin.html" class="menu-link px-5">Profil</a>
+											<router-link href="/profile" class="menu-link px-5">Profil</router-link>
 										</div>
 										<!--end::Menu item-->
 										
@@ -123,10 +123,10 @@
 						<!--begin::Logo-->
 						<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 							<!--begin::Logo image-->
-							<a href="dashboard.html">
+							<router-link to="/dashboard">
 								<img alt="Logo" src="/default_dark_poliban.png" class="h-25px app-sidebar-logo-default" />
 								<img alt="Logo" src="/default_small_poliban.png" class="h-20px app-sidebar-logo-minimize" />
-							</a>
+							</router-link>
 							<!--end::Logo image-->
 							<!--begin::Sidebar toggle-->
 							<!--begin::Minimized sidebar setup:   -->
@@ -330,7 +330,7 @@
                                                   <div class="row mb-6">
                                                     <label class="col-lg-4 col-form-label required fw-semibold fs-6">NIM</label>
                                                     <div class="col-lg-8 fv-row">
-                                                      <input type="text" name="nim" disabled class="form-control form-control-lg form-control-solid" placeholder="NIM" value="C030323118" />
+                                                      <input type="text" name="nim" disabled class="form-control form-control-lg form-control-solid" placeholder="NIM" value="{{ nimMhs }}" />
                                                     </div>
                                                   </div>
                                                   <!-- Nama Lengkap -->
@@ -338,7 +338,7 @@
                                                     <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Lengkap</label>
                                                   
                                                         <div class="col-lg-8 fv-row">
-                                                          <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="Muhammad Rafly Adriazka" />
+                                                          <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" v-model="nimMhs" />
                                                    
                                                     </div>
                                                   </div>
@@ -346,19 +346,7 @@
 													<div class="row mb-6">
 													<label class="col-lg-4 col-form-label required fw-semibold fs-6">Email</label>
 													<div class="col-lg-8 fv-row">
-														<input type="email" name="email" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="raplyadriazka@gmail.com" />
-													</div>
-													</div>
-
-													<!-- Jenis Kelamin -->
-													<div class="row mb-6">
-													<label class="col-lg-4 col-form-label required fw-semibold fs-6">Jenis Kelamin</label>
-													<div class="col-lg-8 fv-row">
-														<select name="jenis_kelamin" class="form-select form-select-lg form-select-solid">
-														<option value="">-- Pilih Jenis Kelamin --</option>
-														<option value="Laki-laki" selected>Laki-laki</option>
-														<option value="Perempuan">Perempuan</option>
-														</select>
+														<input type="email" name="email" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" v-model="emailMhs" />
 													</div>
 													</div>
 
@@ -374,49 +362,14 @@
                                                       </span>
                                                     </label>
                                                     <div class="col-lg-8 fv-row">
-                                                      <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="0877 1655 5618" />
-                                                    </div>
-                                                  </div>
-                                                  <!-- Prodi -->
-                                                  <div class="row mb-6">
-                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Prodi</label>
-                                                    <div class="col-lg-8 fv-row">
-                                                      <input type="text" name="prodi" class="form-control form-control-lg form-control-solid" placeholder="Program Studi" value="Teknik Informatika" />
-                                                    </div>
-                                                  </div>
-                                                  <!-- Semester -->
-                                                  <div class="row mb-6">
-                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Semester</label>
-                                                    <div class="col-lg-8 fv-row">
-                                                      <input type="number" name="semester" class="form-control form-control-lg form-control-solid" placeholder="Semester" value="5" min="1" max="14" />
-                                                    </div>
-                                                  </div>
-                                                  <!-- Tahun Lulus -->
-                                                  <div class="row mb-6">
-                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Tahun Masuk</label>
-                                                    <div class="col-lg-8 fv-row">
-                                                      <input type="number" name="tahun_masuk" class="form-control form-control-lg form-control-solid" placeholder="Tahun Masuk" value="2023" min="1900" max="2100" />
-                                                    </div>
-                                                  </div>
-                                                  <!-- Kelas -->
-                                                  <div class="row mb-6">
-                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Kelas</label>
-                                                    <div class="col-lg-8 fv-row">
-                                                      <input type="text" name="kelas" class="form-control form-control-lg form-control-solid" placeholder="Kelas" value="TI-3A" />
-                                                    </div>
-                                                  </div>
-                                                  <!-- Jurusan -->
-                                                  <div class="row mb-6">
-                                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Jurusan</label>
-                                                    <div class="col-lg-8 fv-row">
-                                                      <input type="text" name="jurusan" class="form-control form-control-lg form-control-solid" placeholder="Jurusan" value="Teknik Informatika" />
+                                                      <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" v-model="handphone" />
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <!--end::Card body-->
                                                 <!--begin::Actions-->
                                                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-												  <a href="profile_mhs.html" class="btn btn-light btn-active-light-primary me-2">Kembali</a>
+												  <router-link to="/profile" class="btn btn-light btn-active-light-primary me-2">Kembali</router-link>
                                                   <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Simpan Perubahan</button>
                                                 </div>
                                                 <!--end::Actions-->
@@ -480,7 +433,6 @@ export default {
         this.namaMhs = data.nama_mhs
         this.nimMhs = data.nim
         this.emailMhs = data.email
-        this.fotoMhs = data.foto_warna_url
         this.handphone = data.handphone
         
       } catch (err) {
