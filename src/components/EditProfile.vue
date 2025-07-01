@@ -472,7 +472,7 @@ export default {
 
     setTimeout(() => {
             this.$router.push('/profil')
-          }, 1000)
+          }, 2500)
 
   } catch (error) {
     console.error('Gagal update:', error)

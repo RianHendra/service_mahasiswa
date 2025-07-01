@@ -407,7 +407,6 @@
 												<!--begin::Col-->
 												<div class="col-lg-8 d-flex align-items-center">
 													<span class="fw-bold fs-6 text-gray-800 me-2">{{ handphone }}</span>
-													<span class="badge badge-success">Terverifikasi</span>
 												</div>
 												<!--end::Col-->
 											</div>
