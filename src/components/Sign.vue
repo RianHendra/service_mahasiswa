@@ -125,7 +125,7 @@ export default {
 
           setTimeout(() => {
             this.$router.push('/dashboard')
-          }, 2000)
+          }, 1800)
         } else {
           Swal.fire({
             icon: 'error',
