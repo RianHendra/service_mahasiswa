@@ -72,7 +72,7 @@
 										<!--end::Menu separator-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<router-link href="/profile" class="menu-link px-5">Profil</router-link>
+											<router-link href="/profil" class="menu-link px-5">Profil</router-link>
 										</div>
 										<!--end::Menu item-->
 										
