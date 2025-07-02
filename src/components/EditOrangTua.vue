@@ -326,18 +326,20 @@ export default {
     }
   },
   mounted() {
-    this.getProfilMahasiswa()
+   
   const q = this.$route.query
+console.log('Query params:', this.$route.query)
 
   if (q.id) {
     this.idEditOrtu = q.id
-    this.namaOrtu = q.nama_ortu || ''
-    this.nikOrtu = q.nik_ortu || ''
-    this.idKabupaten = q.id_kabupaten || '1'
-    this.idProvinsi = q.id_prov || '1'
-    this.idHubungan = q.id_hubungan || '1'
+    this.namaOrtu = q.nama_ortu
+    this.nikOrtu = q.nik_ortu
+    this.idKabupaten = q.id_kabupaten
+    this.idProvinsi = q.id_prov
+    this.idHubungan = q.id_hubungan
     this.isEdit = true
   }
+   this.getProfilMahasiswa()
     // Tunggu DOM selesai render, lalu inisialisasi dropdown menu Metronic
     this.$nextTick(() => {
       if (window.KTMenu) {
