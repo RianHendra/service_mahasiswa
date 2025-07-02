@@ -320,7 +320,9 @@ export default {
     nikOrtu: '',
     idKabupaten: '1',
     idProvinsi: '1',
-    idHubungan: '1'
+    idHubungan: '1',
+      idEditOrtu: null, // ini penting untuk simpan id_ortu jika mode edit
+  isEdit: false // mode edit aktif atau tidak
     }
   },
   mounted() {
@@ -338,7 +340,18 @@ export default {
   },
   methods: {
  
-   
+   editOrangtua(ortu) {
+  this.namaOrtu = ortu.nama_ortu
+  this.nikOrtu = ortu.nik_ortu
+  this.idKabupaten = ortu.id_kabupaten || '1'
+  this.idProvinsi = ortu.id_prov || '1'
+  this.idHubungan = ortu.id_hubungan || '1'
+  this.idEditOrtu = ortu.id_ortu
+  this.isEdit = true
+
+  // redirect ke halaman form (jika pakai halaman terpisah)
+  this.$router.push('/edit-profil-ortu')
+},
 logout() {
     localStorage.removeItem('authToken')
     localStorage.removeItem('userEmail')
@@ -360,68 +373,76 @@ logout() {
             this.$router.push('/')
           }, 2000)
   },
-  async submitOrangtua() {
+ async submitOrangtua() {
+  const nim = localStorage.getItem('UserNim')
+
+  if (!/^\d{16}$/.test(this.nikOrtu)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'NIK tidak valid!',
+      text: 'NIK harus terdiri dari 16 digit angka.'
+    })
+    return
+  }
+
+  const dataOrtu = {
+    nim: nim,
+    nama_ortu: this.namaOrtu,
+    nik_ortu: this.nikOrtu,
+    id_kabupaten: this.idKabupaten,
+    id_prov: this.idProvinsi,
+    id_hubungan: this.idHubungan
+  }
+
   try {
-    const nim = localStorage.getItem('UserNim')
-if (!/^\d{16}$/.test(this.nikOrtu)) {
-  Swal.fire({
-    icon: 'error',
-    title: 'NIK tidak valid!',
-    text: 'NIK harus terdiri dari 16 digit angka.'
-  })
-  return
-}
+    if (this.isEdit && this.idEditOrtu) {
+      // MODE EDIT
+      await axios.put(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua`, dataOrtu)
 
-    const dataOrtu = {
-      nim: nim,
-      nama_ortu: this.namaOrtu,
-      nik_ortu: this.nikOrtu,
-      id_kabupaten: this.idKabupaten,
-      id_prov: this.idProvinsi,
-      id_hubungan: this.idHubungan
-    }
-
-    const response = await axios.post(
-      'https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua',
-      dataOrtu,
-      {
-        headers: {
-          'Content-Type': 'application/json'
+      Swal.fire({
+        icon: 'success',
+        title: 'Data orang tua berhasil diperbarui!',
+        timer: 2000,
+        showConfirmButton: false
+      })
+    } else {
+      // MODE TAMBAH
+      const response = await axios.post(
+        'https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua',
+        dataOrtu,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      }
-    )
+      )
 
-    if (response.data.message === 'Orangtua berhasil ditambah.') {
+      if (response.data.message !== 'Orangtua berhasil ditambah.') {
+        throw new Error(response.data.message)
+      }
+
       Swal.fire({
         icon: 'success',
         title: 'Data orang tua berhasil ditambahkan!',
         timer: 2000,
         showConfirmButton: false
       })
-
-      this.namaOrtu = ''
-      this.nikOrtu = ''
-      this.idKabupaten = '1'
-      this.idProvinsi = '1'
-      this.idHubungan = '1'
-
-      this.$router.push('/profil')
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Gagal menambahkan!',
-        text: response.data.message || 'Terjadi kesalahan.'
-      })
     }
+
+    // Reset dan kembali ke /profil
+    this.resetForm()
+    this.$router.push('/profil')
+
   } catch (error) {
-    console.error('Gagal tambah orang tua:', error)
+    console.error('Gagal submit data orang tua:', error)
     Swal.fire({
       icon: 'error',
-      title: 'Gagal menambahkan data!',
-      text: error.response?.data?.message || 'Terjadi kesalahan saat menyimpan data orang tua.'
+      title: 'Gagal menyimpan data!',
+      text: error.response?.data?.message || error.message || 'Terjadi kesalahan.'
     })
   }
 }
+
 
   }
 }
