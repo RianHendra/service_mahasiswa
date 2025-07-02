@@ -363,6 +363,9 @@
           <div class="col-lg-8 d-flex justify-content-between align-items-center">
             <span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
 			<button @click="editOrangtua(ortu)" class="btn btn-sm btn-warning me-2">Edit</button>
+			<router-link to="/edit-profil-ortu"  class="btn btn-sm btn-warning me-2">
+        Tambah Orang Tua
+      </router-link>
             <button @click="deleteOrangtua(ortu.id_ortu)" class="btn btn-sm btn-danger">Hapus</button>
           </div>
 
