@@ -362,6 +362,7 @@
           <label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
           <div class="col-lg-8 d-flex justify-content-between align-items-center">
             <span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
+			<button @click="editOrangtua(ortu)" class="btn btn-sm btn-warning me-2">Edit</button>
             <button @click="deleteOrangtua(ortu.id_ortu)" class="btn btn-sm btn-danger">Hapus</button>
           </div>
 
@@ -399,7 +400,13 @@ export default {
       fotoMhs: '',
 	  orangTua: null,
 	  orangtua: [],
-	  loading: true
+	  loading: true,
+	  editMode: false,
+		editData: {
+			id_ortu: null,
+			nama_ortu: '',
+			nim: ''
+		}
     }
   },
   mounted() {
@@ -471,9 +478,62 @@ export default {
       text: 'Terjadi kesalahan saat menghapus data.'
     })
   }
-}
+},
+methods: {
+  async editOrangtua(ortu) {
+    this.editMode = true
+    this.editData.id_ortu = ortu.id_ortu
+    this.editData.nama_ortu = ortu.nama_ortu
+    this.editData.nim = ortu.nim
+    Swal.fire({
+      title: 'Edit Nama Orang Tua',
+      input: 'text',
+      inputValue: ortu.nama_ortu,
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Simpan',
+      cancelButtonText: 'Batal',
+      showLoaderOnConfirm: true,
+      preConfirm: async (newNama) => {
+        try {
+          const payload = {
+            nim: ortu.nim,
+            nama_ortu: newNama
+          }
 
-,
+          const res = await axios.put(
+            `https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua`,
+            payload
+          )
+
+          return res.data
+        } catch (error) {
+          console.error('Gagal edit data orang tua:', error)
+          Swal.showValidationMessage(
+            error.response?.data?.message || 'Gagal mengedit data.'
+          )
+        }
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil!',
+          text: 'Data orang tua berhasil diperbarui.',
+          timer: 1500,
+          showConfirmButton: false
+        })
+
+        // Refresh data orang tua
+        this.getDataOrangtua()
+      }
+    })
+  }
+},
+
     async getProfilMahasiswa() {
       try {
         const nim = localStorage.getItem('UserNim')
