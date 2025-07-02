@@ -480,7 +480,7 @@ export default {
       nimMhs: '',
       emailMhs: '',
       fotoMhs: '',
-	  orangtua: [],
+	  orangTua: null,
     }
   },
   mounted() {
