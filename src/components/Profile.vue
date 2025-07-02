@@ -560,5 +560,5 @@ export default {
           }, 2000)
   }
   }
-}
+
 </script>
