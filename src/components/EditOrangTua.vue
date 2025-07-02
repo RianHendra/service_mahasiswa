@@ -242,20 +242,37 @@
 														<input type="text" name="nik_ortu" class="form-control form-control-lg form-control-solid" v-model="nikOrtu" />
 													</div>
 												</div>
-											<select v-model="idKabupaten" class="form-select form-select-solid">
-  <option :value="1">Kabupaten Banjar</option>
-</select>
+												<!-- ID Kabupaten -->
+														<div class="row mb-6">
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Kabupaten</label>
+														<div class="col-lg-8 fv-row">
+															<select v-model="idKabupaten" class="form-select form-select-solid">
+															<option :value="1">Kabupaten Banjar</option>
+															</select>
+														</div>
+														</div>
 
-<select v-model="idProvinsi" class="form-select form-select-solid">
-  <option :value="1">Provinsi Kalimantan Selatan</option>
-</select>
+														<!-- ID Provinsi -->
+																<div class="row mb-6">
+																<label class="col-lg-4 col-form-label required fw-semibold fs-6">Provinsi</label>
+																<div class="col-lg-8 fv-row">
+																	<select v-model="idProvinsi" class="form-select form-select-solid">
+																	<option :value="1">Provinsi Kalimantan Selatan</option>
+																	</select>
+																</div>
+																</div>
 
-<select v-model="idHubungan" class="form-select form-select-solid">
-  <option :value="1">Ayah</option>
-  <option :value="2">Ibu</option>
-  <option :value="3">Wali</option>
-</select>
-
+																<!-- ID Hubungan -->
+																<div class="row mb-6">
+																<label class="col-lg-4 col-form-label required fw-semibold fs-6">Hubungan</label>
+																<div class="col-lg-8 fv-row">
+																	<select v-model="idHubungan" class="form-select form-select-solid">
+																	<option :value="1">Ayah</option>
+                                                                    <option :value="2">Ibu</option>
+                                                                    <option :value="3">Wali</option>
+																	</select>
+																</div>
+																</div>
 
 																				</div>
                                                 <!--end::Card body-->
