@@ -497,13 +497,16 @@ export default {
     })
   },
   methods: {
-	 async getDataOrangTua() {
-    try {
-      const nim = localStorage.getItem('UserNim')
-      const res = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua`)
-      this.orangTua = res.data.ortu.length > 0 ? res.data.ortu[0] : null
-    } catch (error) {
-      console.error('Gagal mengambil data orang tua:', error)
+	 async getDataOrangtua() {
+      try {
+        const nim = localStorage.getItem('UserNim')
+        const res = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/${nim}`)
+        this.orangTua = Array.isArray(res.data.ortu) && res.data.ortu.length > 0
+          ? res.data.ortu[0]
+          : null
+      } catch (error) {
+        console.error('Gagal mengambil data orang tua:', error)
+      }
     }
   },
 	async deleteOrangtua(id) {
