@@ -442,6 +442,14 @@ logout() {
   async submitOrangtua() {
   try {
     const nim = localStorage.getItem('UserNim')
+if (!/^\d{16}$/.test(this.nikOrtu)) {
+  Swal.fire({
+    icon: 'error',
+    title: 'NIK tidak valid!',
+    text: 'NIK harus terdiri dari 16 digit angka.'
+  })
+  return
+}
 
     const dataOrtu = {
       nim: nim,
@@ -475,6 +483,8 @@ logout() {
       this.idKabupaten = '1'
       this.idProvinsi = '1'
       this.idHubungan = '1'
+
+      this.$router.push('/profil')
     } else {
       Swal.fire({
         icon: 'error',
