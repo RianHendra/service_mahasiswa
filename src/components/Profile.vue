@@ -358,21 +358,20 @@
         <p class="text-muted">Belum ada data orang tua.</p>
       </div>
       <div v-else>
-       <!-- Nama Orang Tua -->
-<div class="row mb-3" v-for="ortu in orangtua" :key="ortu.id_ortu">
-  <label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
-  <div class="col-lg-8">
-    <span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
-  </div>
+        <div class="row mb-7" v-for="ortu in orangtua" :key="ortu.id_ortu">
+          <label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
+          <div class="col-lg-8 d-flex justify-content-between align-items-center">
+            <span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
+			<router-link :to="`/edit-profil-ortu/${ortu.id_ortu}`" class="btn btn-sm btn-warning">
+  Edit
+</router-link>
 
-  <label class="col-lg-4 fw-semibold text-muted">NIK Orang Tua</label>
-  <div class="col-lg-8 d-flex justify-content-between align-items-center">
-    <span class="fw-bold fs-6 text-gray-800">{{ ortu.nik_ortu }}</span>
-    <router-link :to="`/edit-profil-ortu/${ortu.id_ortu}`" class="btn btn-sm btn-warning">Edit</router-link>
-    <button @click="deleteOrangtua(ortu.id_ortu)" class="btn btn-sm btn-danger">Hapus</button>
-  </div>
-</div>
 
+            <button @click="deleteOrangtua(ortu.id_ortu)" class="btn btn-sm btn-danger">Hapus</button>
+          </div>
+
+          
+        </div>
       </div>
     </div>
   </div>
