@@ -3,6 +3,7 @@ import Sign from '../components/Sign.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Profil from '../components/Profile.vue'
 import EditProfil from '../components/EditProfile.vue'
+import EditOrangTua from '../components/EditOrangTua.vue'
 
 const routes = [
   {
@@ -26,6 +27,12 @@ const routes = [
     path: '/edit-profil',
     name: 'EditProfil',
     component: EditProfil,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/edit-profil-ortu',
+    name: 'EditOrangTua',
+    component: EditOrangTua,
     meta: { requiresAuth: true }
   }
 

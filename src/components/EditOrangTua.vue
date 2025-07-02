@@ -19,9 +19,8 @@
 						<!--begin::Mobile logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
 							<router-link to="/dashboard" class="d-lg-none">
-                                <img alt="Logo" src="/default_small_poliban.png" class="h-30px" />
-                                </router-link>
-
+								<img alt="Logo" src="/default_small_poliban.png" class="h-30px" />
+							</router-link>
 						</div>
 						<!--end::Mobile logo-->
 						<!--begin::Header wrapper-->
@@ -32,7 +31,7 @@
                                     <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
 										<!--begin:Menu link-->
 										<span class="menu-link">
-											<span class="menu-title">Halo, Selamat Datang  {{ namaMhs }} </span>
+											<span class="menu-title">Halo, Selamat Datang {{ namaMhs }}</span>
 											<span class="menu-arrow d-lg-none"></span>
 										</span>
 										<!--end:Menu link-->
@@ -61,8 +60,7 @@
 												<!--end::Avatar-->
 												<!--begin::Username-->
 												<div class="d-flex flex-column">
-													<div class="fw-bold d-flex align-items-center fs-5">{{ namaMhs }}
-													</div>
+													<div class="fw-bold d-flex align-items-center fs-5">{{ namaMhs }} </div>
 													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ emailMhs }}</a>
 												</div>
 												<!--end::Username-->
@@ -74,8 +72,11 @@
 										<!--end::Menu separator-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
-											<a href="#" class="menu-link px-5">Profil</a>
+											<router-link href="/profil" class="menu-link px-5">Profil</router-link>
 										</div>
+										<!--end::Menu item-->
+										
+										<!--end::Menu item-->
 										<!--begin::Menu item-->
 										<div class="menu-item px-5">
 											<a @click="logout" class="menu-link px-5">Logout</a>
@@ -149,10 +150,9 @@
 									<!--begin::Menu-->
 									<div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
 										<!--begin:Menu item-->
-                                        
 										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 											<!--begin:Menu link-->
-                                        <router-link to="/dashboard" class="menu-link">
+											<router-link to="/dashboard" class="menu-link">
                                             <span class="menu-icon">
                                                 <i class="ki-duotone ki-element-11 fs-2">
                                                 <span class="path1"></span>
@@ -163,10 +163,8 @@
                                             </span>
                                             <span class="menu-title">Dashboard</span>
                                             </router-link>
-
 											<!--end:Menu link-->
 										</div>
-                                         
 										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 											<!--begin:Menu link-->
 											<span class="menu-link">
@@ -268,7 +266,7 @@
 									<!--begin::Page title-->
 									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 										<!--begin::Title-->
-										<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">Detail Mahasiswa</h1>
+										<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">Pengaturan Mahasiswa</h1>
 										<!--end::Title-->
 										<!--begin::Breadcrumb-->
 										<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -289,177 +287,95 @@
 							<div id="kt_app_content" class="app-content flex-column-fluid">
 								<!--begin::Content container-->
 								<div id="kt_app_content_container" class="app-container container-xxl">
-									<!--begin::Navbar-->
+								
+									<!--begin::Basic info-->
 									<div class="card mb-5 mb-xl-10">
-										<div class="card-body pt-9 pb-0">
-											<!--begin::Details-->
-											<div class="d-flex flex-wrap flex-sm-nowrap">
-												<!--begin: Pic-->
-												<div class="me-7 mb-4">
-													<div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-														<img src="/rafly.png" alt="image" />
-														<div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div>
-													</div>
-												</div>
-												<!--end::Pic-->
-												<!--begin::Info-->
-												<div class="flex-grow-1">
-													<!--begin::Title-->
-													<div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
-														<!--begin::User-->
-														<div class="d-flex flex-column">
-															<!--begin::Name-->
-															<div class="d-flex align-items-center mb-2">
-																<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ namaMhs }}</a>
-																<a href="#">
-																	<i class="ki-duotone ki-verify fs-1 text-primary">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</a>
-															</div>
-															<!--end::Name-->
-															<!--begin::Info-->
-															<div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
-																<a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
-																<i class="ki-duotone ki-sms fs-4">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																</i>{{ emailMhs }}</a>
-															</div>
-															<!--end::Info-->
-														</div>
-														<!--end::User-->
-													</div>
-													<!--end::Title-->
-												</div>
-												<!--end::Info-->
-											</div>
-											<!--end::Details-->
-											<!--begin::Navs-->
-											<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
-												<!--begin::Nav item-->
-												<li class="nav-item mt-2">
-													<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#">Profile</a>
-												</li>
-												<!--end::Nav item-->
-												
-
-												
-												<!--begin::Nav item-->
-												
-												<!--end::Nav item-->
-												
-											</ul>
-											<!--begin::Navs-->
-										</div>
-									</div>
-									<!--end::Navbar-->
-									<!--begin::details View-->
-									<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
 										<!--begin::Card header-->
-										<div class="card-header cursor-pointer">
+										<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
 											<!--begin::Card title-->
 											<div class="card-title m-0">
-												<h3 class="fw-bold m-0">Profile Details</h3>
+												<h3 class="fw-bold m-0">Data Orang Tua</h3>
 											</div>
 											<!--end::Card title-->
-											<!--begin::Action-->
-											<router-link to="/edit-profil" class="btn btn-sm btn-primary align-self-center">Edit Profile</router-link>
-											<!--end::Action-->
 										</div>
 										<!--begin::Card header-->
-										<!--begin::Card body-->
-										<div class="card-body p-9">
-											<!--begin::Row-->
-											<div class="row mb-7">
-												<!--begin::Label-->
-												<label class="col-lg-4 fw-semibold text-muted">Nama Lengkap</label>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-8">
-													<span class="fw-bold fs-6 text-gray-800">{{ namaMhs }}</span>
+										<!--begin::Content-->
+										<div id="kt_account_settings_profile_details" class="collapse show">
+											<!--begin::Form-->
+											<form id="kt_account_profile_details_form" class="form" @submit.prevent="updateProfil">
+                                                <!--begin::Card body-->
+                                                <div class="card-body border-top p-9">
+                                            
+												<!-- Nama Orang Tua -->
+												<div class="row mb-6">
+													<label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Orang Tua</label>
+													<div class="col-lg-8 fv-row">
+														<input type="text" name="nama_ortu" class="form-control form-control-lg form-control-solid" v-model="namaOrtu" />
+													</div>
 												</div>
-												<!--end::Col-->
-											</div>
-											<!--end::Row-->
-											<!--begin::Input group-->
-											<div class="row mb-7">
-												<!--begin::Label-->
-												<label class="col-lg-4 fw-semibold text-muted">NIM</label>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-8 fv-row">
-													<span class="fw-semibold text-gray-800 fs-6">{{ nimMhs }}</span>
+
+												<!-- NIK Orang Tua -->
+												<div class="row mb-6">
+												<label class="col-lg-4 col-form-label required fw-semibold fs-6">NIK Orang Tua</label>
+													<div class="col-lg-8 fv-row">
+														<input type="text" name="nik_ortu" class="form-control form-control-lg form-control-solid" v-model="nikOrtu" />
+													</div>
 												</div>
-												<!--end::Col-->
-											</div>
-										
-											<!--end::Input group-->
-											<!--begin::Input group-->
-											<div class="row mb-7">
-												<!--begin::Label-->
-												<label class="col-lg-4 fw-semibold text-muted">No. HP/WA 
-												<span class="ms-1" data-bs-toggle="tooltip" title="Phone number must be active">
-													<i class="ki-duotone ki-information fs-7">
-														<span class="path1"></span>
-														<span class="path2"></span>
-														<span class="path3"></span>
-													</i>
-												</span></label>
-												<!--end::Label-->
-												<!--begin::Col-->
-												<div class="col-lg-8 d-flex align-items-center">
-													<span class="fw-bold fs-6 text-gray-800 me-2">{{ handphone }}</span>
-												</div>
-												<!--end::Col-->
-											</div>
-											<!--end::Input group-->
-											<!--begin::Input group-->
-											<!--end::Input group-->
-										
-											<!--end::Notice-->
+												<!-- ID Kabupaten -->
+														<div class="row mb-6">
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Kabupaten</label>
+														<div class="col-lg-8 fv-row">
+															<select v-model="idKabupaten" class="form-select form-select-solid">
+															<option value="1">Kabupaten Banjar</option>
+															</select>
+														</div>
+														</div>
+
+														<!-- ID Provinsi -->
+																<div class="row mb-6">
+																<label class="col-lg-4 col-form-label required fw-semibold fs-6">Provinsi</label>
+																<div class="col-lg-8 fv-row">
+																	<select v-model="idProvinsi" class="form-select form-select-solid">
+																	<option value="1">Provinsi Kalimantan Selatan</option>
+																	</select>
+																</div>
+																</div>
+
+																<!-- ID Hubungan -->
+																<div class="row mb-6">
+																<label class="col-lg-4 col-form-label required fw-semibold fs-6">Hubungan</label>
+																<div class="col-lg-8 fv-row">
+																	<select v-model="idHubungan" class="form-select form-select-solid">
+																	<option value="1">Ayah</option>
+																	<option value="2">Ibu</option>
+																	<option value="3">Wali</option>
+																	</select>
+																</div>
+																</div>
+
+																				</div>
+                                                <!--end::Card body-->
+                                                <!--begin::Actions-->
+                                                <div class="card-footer d-flex justify-content-end py-6 px-9">
+												  <router-link to="/profil" class="btn btn-light btn-active-light-primary me-2">Kembali</router-link>
+												  <button type="button" class="ml-3 btn btn-success" @click="submitOrangtua">Simpan</button>
+                                                </div>
+                                                <!--end::Actions-->
+                                              </form>
+                                              
+                                              
+											<!--end::Form-->
 										</div>
-										<!--end::Card body-->
+										<!--end::Content-->
 									</div>
-									<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
-    <div class="card-header cursor-pointer">
-      <div class="card-title m-0">
-        <h3 class="fw-bold m-0">Data Orang Tua</h3>
-      </div>
-      <router-link to="/edit-profil-ortu" class="btn btn-sm btn-primary align-self-center">
-        Tambah Orang Tua
-      </router-link>
-    </div>
-
-    <div class="card-body p-9">
-      <div v-if="loading">Memuat data...</div>
-      <div v-else-if="orangtua.length === 0">
-        <p class="text-muted">Belum ada data orang tua.</p>
-      </div>
-      <div v-else>
-        <div class="row mb-7" v-for="ortu in orangtua" :key="ortu.id_ortu">
-          <label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
-          <div class="col-lg-8 d-flex justify-content-between align-items-center">
-            <span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
-            <button @click="deleteOrangtua(ortu.id_ortu)" class="btn btn-sm btn-danger">Hapus</button>
-          </div>
-
-          <label class="col-lg-4 fw-semibold text-muted">NIK</label>
-          <div class="col-lg-8">
-            <span class="fw-bold fs-6 text-gray-800">{{ ortu.nik_ortu }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-									<!--end::details View-->
+									<!--end::Basic info-->
 								</div>
 								<!--end::Content container-->
 							</div>
 							<!--end::Content-->
 						</div>
 						<!--end::Content wrapper-->
+						<!--begin::Footer-->
 					</div>
 					<!--end:::Main-->
 					<!--begin::aside-->
@@ -472,20 +388,23 @@
 </template>
 <script>
 import axios from 'axios'
-
+import Swal from 'sweetalert2'
 export default {
   data() {
     return {
       namaMhs: '',
       nimMhs: '',
-      emailMhs: '',
-      fotoMhs: '',
-	  orangtua: [],
+	  // Form Orang Tua
+    namaOrtu: '',
+    nikOrtu: '',
+    idKabupaten: '1',
+    idProvinsi: '1',
+    idHubungan: '1'
     }
   },
   mounted() {
     this.getProfilMahasiswa()
-	this.getOrangtua()
+
     // Tunggu DOM selesai render, lalu inisialisasi dropdown menu Metronic
     this.$nextTick(() => {
       if (window.KTMenu) {
@@ -497,49 +416,9 @@ export default {
     })
   },
   methods: {
-	 async getOrangtua() {
-      try {
-        const nim = localStorage.getItem('UserNim')
-        const response = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/${nim}`)
-        if (response.data && response.data.ortu) {
-          this.orangtua = response.data.ortu
-        }
-      } catch (error) {
-        console.error('Gagal mengambil data orang tua:', error)
-      } finally {
-        this.loading = false
-      }
-	},
-	async deleteOrangtua(id) {
-      const konfirmasi = confirm('Yakin ingin menghapus data orang tua ini?')
-      if (!konfirmasi) return
-
-      try {
-        await axios.delete(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua/${id}`)
-        this.orangtua = this.orangtua.filter(o => o.id_ortu !== id)
-        alert('Data berhasil dihapus.')
-      } catch (error) {
-        console.error('Gagal hapus data orang tua:', error)
-        alert('Gagal menghapus data.')
-      }
-    },
-    async getProfilMahasiswa() {
-      try {
-        const nim = localStorage.getItem('UserNim')
-        const res = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/${nim}`)
-        const data = res.data
-
-        this.namaMhs = data.nama_mhs
-        this.nimMhs = data.nim
-        this.emailMhs = data.email
-        this.fotoMhs = data.foto_warna_url
-        this.handphone = data.handphone
-        
-      } catch (err) {
-        console.error('Gagal ambil data profil mahasiswa:', err)
-      }
-    },
-    logout() {
+ 
+   
+logout() {
     localStorage.removeItem('authToken')
     localStorage.removeItem('userEmail')
     localStorage.removeItem('userRole')
@@ -559,7 +438,60 @@ export default {
     setTimeout(() => {
             this.$router.push('/')
           }, 2000)
+  },
+  async submitOrangtua() {
+  try {
+    const nim = localStorage.getItem('UserNim')
+
+    const dataOrtu = {
+      nim: nim,
+      nama_ortu: this.namaOrtu,
+      nik_ortu: this.nikOrtu,
+      id_kabupaten: this.idKabupaten,
+      id_prov: this.idProvinsi,
+      id_hubungan: this.idHubungan
+    }
+
+    const response = await axios.post(
+      'https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua',
+      dataOrtu,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+
+    if (response.data.message === 'Orangtua berhasil ditambah.') {
+      Swal.fire({
+        icon: 'success',
+        title: 'Data orang tua berhasil ditambahkan!',
+        timer: 2000,
+        showConfirmButton: false
+      })
+
+      this.namaOrtu = ''
+      this.nikOrtu = ''
+      this.idKabupaten = '1'
+      this.idProvinsi = '1'
+      this.idHubungan = '1'
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal menambahkan!',
+        text: response.data.message || 'Terjadi kesalahan.'
+      })
+    }
+  } catch (error) {
+    console.error('Gagal tambah orang tua:', error)
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal menambahkan data!',
+      text: error.response?.data?.message || 'Terjadi kesalahan saat menyimpan data orang tua.'
+    })
   }
+}
+
   }
 }
 </script>
