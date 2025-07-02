@@ -514,8 +514,16 @@ export default {
 },
 
 	async deleteOrangtua(id) {
-  const konfirmasi = confirm('Yakin ingin menghapus data orang tua ini?')
-  if (!konfirmasi) return
+  const result = await Swal.fire({
+    title: 'Apakah Anda yakin?',
+    text: 'Data orang tua ini akan dihapus secara permanen.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Ya, hapus!',
+    cancelButtonText: 'Batal'
+  })
+
+  if (!result.isConfirmed) return
 
   try {
     await axios.delete(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua/${id}`)
@@ -523,17 +531,28 @@ export default {
     // Filter data ortu
     this.orangtua = this.orangtua.filter(o => o.id_ortu !== id)
 
-    // Cek ulang: jika tidak ada data ortu, set orangTua ke null agar tombol tambah muncul
+    // Cek ulang jika kosong
     if (this.orangtua.length === 0) {
       this.orangTua = null
     }
 
-    alert('Data berhasil dihapus.')
+    Swal.fire({
+      icon: 'success',
+      title: 'Berhasil!',
+      text: 'Data orang tua berhasil dihapus.',
+      timer: 2000,
+      showConfirmButton: false
+    })
   } catch (error) {
     console.error('Gagal hapus data orang tua:', error)
-    alert('Gagal menghapus data.')
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal!',
+      text: 'Terjadi kesalahan saat menghapus data.'
+    })
   }
 }
+
 ,
     async getProfilMahasiswa() {
       try {
