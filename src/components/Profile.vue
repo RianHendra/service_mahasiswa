@@ -512,7 +512,7 @@ export default {
     console.error('Gagal mengambil data orang tua:', error)
     this.loading = false
   }
-}
+},
 	async deleteOrangtua(id) {
       const konfirmasi = confirm('Yakin ingin menghapus data orang tua ini?')
       if (!konfirmasi) return
@@ -564,5 +564,6 @@ export default {
           }, 2000)
   }
   }
+}
 
 </script>
