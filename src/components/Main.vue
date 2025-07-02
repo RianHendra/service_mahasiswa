@@ -439,6 +439,7 @@ export default {
   return {
     id_kelas_mk: item.presensi_dosen.id_kelas_mk,
     namaMatkul: `Kelas MK ${item.presensi_dosen.id_kelas_mk}`,
+    id_presensi_dosen: item.presensi_dosen.id_presensi_dosen,
     alias: '',
     jam: item.presensi_dosen.waktu_presensi || '08.00 – 09.40',
     id_pegawai: '',
