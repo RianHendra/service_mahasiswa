@@ -29,8 +29,15 @@ const routes = [
     component: EditProfil,
     meta: { requiresAuth: true }
   },
+  
   {
     path: '/edit-profil-ortu',
+    name: 'TambahOrtua',
+    component: EditOrangTua,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/edit-profil-ortu:1',
     name: 'EditOrangTua',
     component: EditOrangTua,
     meta: { requiresAuth: true }

@@ -362,24 +362,12 @@
           <label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
           <div class="col-lg-8 d-flex justify-content-between align-items-center">
             <span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
-			 <label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
+			 <label class="col-lg-4 fw-semibold text-muted">NIK Orang Tua</label>
 			<span class="fw-bold fs-6 text-gray-800">{{ ortu.nik_ortu }}</span>
-			<router-link
-			:to="{
-				path: '/edit-profil-ortu',
-				query: {
-				id: ortu.id_ortu,
-				nama_ortu: ortu.nama_ortu,
-				nik_ortu: ortu.nik_ortu,
-				id_kabupaten: ortu.id_kabupaten,
-				id_prov: ortu.id_prov,
-				id_hubungan: ortu.id_hubungan
-				}
-			}"
-			class="btn btn-sm btn-warning me-2"
-			>
-			Edit
-			</router-link>
+			<router-link :to="`/edit-profil-ortu/${ortu.id_ortu}`" class="btn btn-sm btn-warning">
+  Edit
+</router-link>
+
 
             <button @click="deleteOrangtua(ortu.id_ortu)" class="btn btn-sm btn-danger">Hapus</button>
           </div>
@@ -429,7 +417,7 @@ export default {
   },
   mounted() {
     this.getProfilMahasiswa()
-	this.getDataOrangtua()
+	this.getDetailOrangtua()
     // Tunggu DOM selesai render, lalu inisialisasi dropdown menu Metronic
     this.$nextTick(() => {
       if (window.KTMenu) {
@@ -441,22 +429,30 @@ export default {
     })
   },
   methods: {
-	 async getDataOrangtua() {
+	 async getDetailOrangtua() {
   try {
-    const nim = localStorage.getItem('UserNim')
-    const res = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua`)
+    const id = this.$route.params.id // Ambil ID dari URL
+    const res = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua/${id}`)
 
-    const dataOrtu = res.data // karena langsung array
-    const filtered = dataOrtu.filter(ortu => ortu.nim === nim)
+    const ortu = res.data
 
-    this.orangtua = filtered
-    this.orangTua = filtered.length > 0 ? filtered[0] : null
-    this.loading = false
+    // Isi ke input form
+    this.namaOrtu = ortu.nama_ortu
+    this.nikOrtu = ortu.nik_ortu
+    this.idKabupaten = ortu.id_kabupaten?.toString() || '1'
+    this.idProvinsi = ortu.id_prov?.toString() || '1'
+    this.idHubungan = ortu.id_hubungan?.toString() || '1'
   } catch (error) {
-    console.error('Gagal mengambil data orang tua:', error)
-    this.loading = false
+    console.error('Gagal ambil data orang tua:', error)
+    this.$router.push('/profil')
+    Swal.fire({
+      icon: 'error',
+      title: 'Data tidak ditemukan!',
+      text: 'Pastikan ID data orang tua valid.'
+    })
   }
 },
+
 
 	async deleteOrangtua(id) {
   const result = await Swal.fire({

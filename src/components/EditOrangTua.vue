@@ -327,17 +327,11 @@ export default {
   },
   mounted() {
    
-  const q = this.$route.query
-console.log('Query params:', this.$route.query)
-
-  if (q.id) {
-    this.idEditOrtu = q.id
-    this.namaOrtu = q.nama_ortu
-    this.nikOrtu = q.nik_ortu
-    this.idKabupaten = Number(q.id_kabupaten)
-    this.idProvinsi = Number(q.id_prov)
-    this.idHubungan = Number(q.id_hubungan)
+  const id = this.$route.params.id
+  if (id) {
     this.isEdit = true
+    this.idOrtu = id
+    this.getDetailOrangtua()
   }
    this.getProfilMahasiswa()
     // Tunggu DOM selesai render, lalu inisialisasi dropdown menu Metronic
