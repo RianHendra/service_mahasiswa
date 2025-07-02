@@ -366,11 +366,28 @@
                                                     </div>
                                                   </div>
                                                 </div>
+												<!-- Nama Orang Tua -->
+												<div class="row mb-6">
+												<label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Orang Tua</label>
+												<div class="col-lg-8 fv-row">
+													<input type="text" name="nama_ortu" class="form-control form-control-lg form-control-solid" v-model="namaOrtu" />
+												</div>
+												</div>
+
+												<!-- NIK Orang Tua -->
+												<div class="row mb-6">
+												<label class="col-lg-4 col-form-label required fw-semibold fs-6">NIK Orang Tua</label>
+												<div class="col-lg-8 fv-row">
+													<input type="text" name="nik_ortu" class="form-control form-control-lg form-control-solid" v-model="nikOrtu" />
+												</div>
+												</div>
+
                                                 <!--end::Card body-->
                                                 <!--begin::Actions-->
                                                 <div class="card-footer d-flex justify-content-end py-6 px-9">
 												  <router-link to="/profil" class="btn btn-light btn-active-light-primary me-2">Kembali</router-link>
                                                   <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Simpan Perubahan</button>
+												  <button type="button" class="btn btn-success" @click="submitOrangtua">Simpan Orang Tua</button>
                                                 </div>
                                                 <!--end::Actions-->
                                               </form>
@@ -409,6 +426,8 @@ export default {
       emailMhs: '',
       fotoMhs: '',
       formNamaMhs : '',
+	  namaOrtu: '',
+       nikOrtu: ''
     }
   },
   mounted() {
@@ -503,7 +522,49 @@ logout() {
     setTimeout(() => {
             this.$router.push('/')
           }, 2000)
+  },
+  async submitOrangtua() {
+  try {
+    const nim = localStorage.getItem('UserNim')
+    const dataOrtu = {
+      nim: nim,
+      nama_ortu: this.namaOrtu,
+      nik_ortu: this.nikOrtu
+    }
+
+    const response = await axios.post('https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua', dataOrtu)
+
+    if (response.data.message === 'Orangtua berhasil ditambah.') {
+      Swal.fire({
+        icon: 'success',
+        title: 'Data orang tua berhasil ditambahkan!',
+        timer: 2000,
+        showConfirmButton: false
+      })
+
+      // Kosongkan field setelah submit
+      this.namaOrtu = ''
+      this.nikOrtu = ''
+
+      // Optional: Redirect atau ambil ulang data
+      // this.getProfilMahasiswa()
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal menambahkan!',
+        text: response.data.message || 'Terjadi kesalahan.'
+      })
+    }
+  } catch (error) {
+    console.error('Gagal tambah orang tua:', error)
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal menambahkan data!',
+      text: error.response?.data?.message || 'Terjadi kesalahan saat menyimpan data orang tua.'
+    })
   }
+}
+
 
 
 

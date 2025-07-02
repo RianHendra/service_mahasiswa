@@ -394,6 +394,16 @@
 												</div>
 												<!--end::Col-->
 											</div>
+											<div class="row mb-7">
+												<!--begin::Label-->
+												<label class="col-lg-4 fw-semibold text-muted">Orang Tua</label>
+												<!--end::Label-->
+												<!--begin::Col-->
+												<div class="col-lg-8 fv-row">
+													<span class="fw-semibold text-gray-800 fs-6">{{ nimMhs }}</span>
+												</div>
+												<!--end::Col-->
+											</div>
 											<!--end::Input group-->
 											<!--begin::Input group-->
 											<div class="row mb-7">
@@ -420,6 +430,36 @@
 											<!--end::Notice-->
 										</div>
 										<!--end::Card body-->
+									</div>
+									<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+										<div class="card-header cursor-pointer">
+										<div class="card-title m-0">
+											<h3 class="fw-bold m-0">Data Orang Tua</h3>
+										</div>
+										<router-link to="/edit-profil" class="btn btn-sm btn-primary align-self-center">
+											Tambah Orang Tua
+										</router-link>
+										</div>
+
+										<div class="card-body p-9">
+										<div v-if="loading">Memuat data...</div>
+										<div v-else-if="orangtua.length === 0">
+											<p class="text-muted">Belum ada data orang tua.</p>
+										</div>
+										<div v-else>
+											<div class="row mb-7" v-for="ortu in orangtua" :key="ortu.id_ortu">
+											<label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
+											<div class="col-lg-8">
+												<span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
+											</div>
+
+											<label class="col-lg-4 fw-semibold text-muted">NIK</label>
+											<div class="col-lg-8">
+												<span class="fw-bold fs-6 text-gray-800">{{ ortu.nik_ortu }}</span>
+											</div>
+											</div>
+										</div>
+										</div>
 									</div>
 									<!--end::details View-->
 								</div>
@@ -448,11 +488,12 @@ export default {
       nimMhs: '',
       emailMhs: '',
       fotoMhs: '',
+	  orangtua: [],
     }
   },
   mounted() {
     this.getProfilMahasiswa()
-
+	this.getOrangtua()
     // Tunggu DOM selesai render, lalu inisialisasi dropdown menu Metronic
     this.$nextTick(() => {
       if (window.KTMenu) {
@@ -464,6 +505,19 @@ export default {
     })
   },
   methods: {
+	 async getOrangtua() {
+      try {
+        const nim = localStorage.getItem('UserNim')
+        const response = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/${nim}`)
+        if (response.data && response.data.ortu) {
+          this.orangtua = response.data.ortu
+        }
+      } catch (error) {
+        console.error('Gagal mengambil data orang tua:', error)
+      } finally {
+        this.loading = false
+      }
+	},
     async getProfilMahasiswa() {
       try {
         const nim = localStorage.getItem('UserNim')
