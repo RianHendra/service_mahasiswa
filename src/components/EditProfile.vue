@@ -377,11 +377,43 @@
 												<!-- NIK Orang Tua -->
 												<div class="row mb-6">
 												<label class="col-lg-4 col-form-label required fw-semibold fs-6">NIK Orang Tua</label>
-												<div class="col-lg-8 fv-row">
-													<input type="text" name="nik_ortu" class="form-control form-control-lg form-control-solid" v-model="nikOrtu" />
+													<div class="col-lg-8 fv-row">
+														<input type="text" name="nik_ortu" class="form-control form-control-lg form-control-solid" v-model="nikOrtu" />
+													</div>
 												</div>
-												</div>
-    					</div>
+												<!-- ID Kabupaten -->
+														<div class="row mb-6">
+														<label class="col-lg-4 col-form-label required fw-semibold fs-6">Kabupaten</label>
+														<div class="col-lg-8 fv-row">
+															<select v-model="idKabupaten" class="form-select form-select-solid">
+															<option value="1">Kabupaten Banjar</option>
+															</select>
+														</div>
+														</div>
+
+														<!-- ID Provinsi -->
+																<div class="row mb-6">
+																<label class="col-lg-4 col-form-label required fw-semibold fs-6">Provinsi</label>
+																<div class="col-lg-8 fv-row">
+																	<select v-model="idProvinsi" class="form-select form-select-solid">
+																	<option value="1">Provinsi Kalimantan Selatan</option>
+																	</select>
+																</div>
+																</div>
+
+																<!-- ID Hubungan -->
+																<div class="row mb-6">
+																<label class="col-lg-4 col-form-label required fw-semibold fs-6">Hubungan</label>
+																<div class="col-lg-8 fv-row">
+																	<select v-model="idHubungan" class="form-select form-select-solid">
+																	<option value="1">Ayah</option>
+																	<option value="2">Ibu</option>
+																	<option value="3">Wali</option>
+																	</select>
+																</div>
+																</div>
+
+																				</div>
                                                 <!--end::Card body-->
                                                 <!--begin::Actions-->
                                                 <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -426,8 +458,12 @@ export default {
       emailMhs: '',
       fotoMhs: '',
       formNamaMhs : '',
-	  namaOrtu: '',
-       nikOrtu: ''
+	  // Form Orang Tua
+    namaOrtu: '',
+    nikOrtu: '',
+    idKabupaten: '1',
+    idProvinsi: '1',
+    idHubungan: '1'
     }
   },
   mounted() {
@@ -526,13 +562,25 @@ logout() {
   async submitOrangtua() {
   try {
     const nim = localStorage.getItem('UserNim')
+
     const dataOrtu = {
       nim: nim,
       nama_ortu: this.namaOrtu,
-      nik_ortu: this.nikOrtu
+      nik_ortu: this.nikOrtu,
+      id_kabupaten: this.idKabupaten,
+      id_prov: this.idProvinsi,
+      id_hubungan: this.idHubungan
     }
 
-    const response = await axios.post('https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua', dataOrtu)
+    const response = await axios.post(
+      'https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua',
+      dataOrtu,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
 
     if (response.data.message === 'Orangtua berhasil ditambah.') {
       Swal.fire({
@@ -542,12 +590,11 @@ logout() {
         showConfirmButton: false
       })
 
-      // Kosongkan field setelah submit
       this.namaOrtu = ''
       this.nikOrtu = ''
-
-      // Optional: Redirect atau ambil ulang data
-      // this.getProfilMahasiswa()
+      this.idKabupaten = '1'
+      this.idProvinsi = '1'
+      this.idHubungan = '1'
     } else {
       Swal.fire({
         icon: 'error',
@@ -564,10 +611,6 @@ logout() {
     })
   }
 }
-
-
-
-
 
   }
 }
