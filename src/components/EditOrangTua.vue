@@ -321,13 +321,23 @@ export default {
     idKabupaten: '1',
     idProvinsi: '1',
     idHubungan: '1',
-      idEditOrtu: null, // ini penting untuk simpan id_ortu jika mode edit
-  isEdit: false // mode edit aktif atau tidak
+ isEdit: false,
+  idEditOrtu: null,
     }
   },
   mounted() {
     this.getProfilMahasiswa()
+  const q = this.$route.query
 
+  if (q.id) {
+    this.idEditOrtu = q.id
+    this.namaOrtu = q.nama_ortu || ''
+    this.nikOrtu = q.nik_ortu || ''
+    this.idKabupaten = q.id_kabupaten || '1'
+    this.idProvinsi = q.id_prov || '1'
+    this.idHubungan = q.id_hubungan || '1'
+    this.isEdit = true
+  }
     // Tunggu DOM selesai render, lalu inisialisasi dropdown menu Metronic
     this.$nextTick(() => {
       if (window.KTMenu) {
@@ -337,6 +347,7 @@ export default {
         console.warn('KTMenu not available')
       }
     })
+    
   },
   methods: {
  
@@ -373,20 +384,10 @@ logout() {
             this.$router.push('/')
           }, 2000)
   },
- async submitOrangtua() {
+async submitOrangtua() {
   const nim = localStorage.getItem('UserNim')
-
-  if (!/^\d{16}$/.test(this.nikOrtu)) {
-    Swal.fire({
-      icon: 'error',
-      title: 'NIK tidak valid!',
-      text: 'NIK harus terdiri dari 16 digit angka.'
-    })
-    return
-  }
-
   const dataOrtu = {
-    nim: nim,
+    nim,
     nama_ortu: this.namaOrtu,
     nik_ortu: this.nikOrtu,
     id_kabupaten: this.idKabupaten,
@@ -396,9 +397,8 @@ logout() {
 
   try {
     if (this.isEdit && this.idEditOrtu) {
-      // MODE EDIT
-      await axios.put(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua`, dataOrtu)
-
+      // EDIT
+      await axios.put(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua/${this.idEditOrtu}`, dataOrtu)
       Swal.fire({
         icon: 'success',
         title: 'Data orang tua berhasil diperbarui!',
@@ -406,21 +406,8 @@ logout() {
         showConfirmButton: false
       })
     } else {
-      // MODE TAMBAH
-      const response = await axios.post(
-        'https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua',
-        dataOrtu,
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-
-      if (response.data.message !== 'Orangtua berhasil ditambah.') {
-        throw new Error(response.data.message)
-      }
-
+      // TAMBAH
+      await axios.post(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua`, dataOrtu)
       Swal.fire({
         icon: 'success',
         title: 'Data orang tua berhasil ditambahkan!',
@@ -429,19 +416,16 @@ logout() {
       })
     }
 
-    // Reset dan kembali ke /profil
-
     this.$router.push('/profil')
-
   } catch (error) {
-    console.error('Gagal submit data orang tua:', error)
     Swal.fire({
       icon: 'error',
-      title: 'Gagal menyimpan data!',
-      text: error.response?.data?.message || error.message || 'Terjadi kesalahan.'
+      title: 'Gagal menyimpan data',
+      text: error.response?.data?.message || 'Terjadi kesalahan.'
     })
   }
 }
+
 
 
   }

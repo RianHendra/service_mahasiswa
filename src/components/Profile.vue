@@ -362,10 +362,23 @@
           <label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
           <div class="col-lg-8 d-flex justify-content-between align-items-center">
             <span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
-			<button @click="editOrangtua(ortu)" class="btn btn-sm btn-warning me-2">Edit</button>
-			<router-link to="/edit-profil-ortu"  class="btn btn-sm btn-warning me-2">
-        Tambah Orang Tua
-      </router-link>
+			<router-link
+			:to="{
+				path: '/edit-profil-ortu',
+				query: {
+				id: ortu.id_ortu,
+				nama_ortu: ortu.nama_ortu,
+				nik_ortu: ortu.nik_ortu,
+				id_kabupaten: ortu.id_kabupaten,
+				id_prov: ortu.id_prov,
+				id_hubungan: ortu.id_hubungan
+				}
+			}"
+			class="btn btn-sm btn-warning me-2"
+			>
+			Edit
+			</router-link>
+
             <button @click="deleteOrangtua(ortu.id_ortu)" class="btn btn-sm btn-danger">Hapus</button>
           </div>
 
