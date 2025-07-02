@@ -429,29 +429,24 @@ export default {
     })
   },
   methods: {
-	 async getDetailOrangtua() {
+async getDetailOrangtua() {
   try {
-    const id = this.$route.params.id // Ambil ID dari URL
-    const res = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua/${id}`)
-
-    const ortu = res.data
-
-    // Isi ke input form
+    const res = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua/${this.idEditOrtu}`)
+    const ortu = res.data.data
     this.namaOrtu = ortu.nama_ortu
     this.nikOrtu = ortu.nik_ortu
-    this.idKabupaten = ortu.id_kabupaten?.toString() || '1'
-    this.idProvinsi = ortu.id_prov?.toString() || '1'
-    this.idHubungan = ortu.id_hubungan?.toString() || '1'
+    this.idKabupaten = ortu.id_kabupaten
+    this.idProvinsi = ortu.id_prov
+    this.idHubungan = ortu.id_hubungan
   } catch (error) {
-    console.error('Gagal ambil data orang tua:', error)
-    this.$router.push('/profil')
     Swal.fire({
       icon: 'error',
-      title: 'Data tidak ditemukan!',
-      text: 'Pastikan ID data orang tua valid.'
+      title: 'Gagal memuat data orang tua',
+      text: error.response?.data?.message || 'Terjadi kesalahan saat memuat data.'
     })
   }
-},
+}
+,
 
 
 	async deleteOrangtua(id) {

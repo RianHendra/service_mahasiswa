@@ -382,6 +382,17 @@ logout() {
   },
 async submitOrangtua() {
   const nim = localStorage.getItem('UserNim')
+
+  if (!this.namaOrtu || !this.nikOrtu) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Harap lengkapi semua data!',
+      timer: 2000,
+      showConfirmButton: false
+    })
+    return
+  }
+
   const dataOrtu = {
     nim,
     nama_ortu: this.namaOrtu,
@@ -393,23 +404,11 @@ async submitOrangtua() {
 
   try {
     if (this.isEdit && this.idEditOrtu) {
-      // EDIT
       await axios.put(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua/${this.idEditOrtu}`, dataOrtu)
-      Swal.fire({
-        icon: 'success',
-        title: 'Data orang tua berhasil diperbarui!',
-        timer: 2000,
-        showConfirmButton: false
-      })
+      Swal.fire({ icon: 'success', title: 'Data diperbarui!' })
     } else {
-      // TAMBAH
       await axios.post(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua`, dataOrtu)
-      Swal.fire({
-        icon: 'success',
-        title: 'Data orang tua berhasil ditambahkan!',
-        timer: 2000,
-        showConfirmButton: false
-      })
+      Swal.fire({ icon: 'success', title: 'Data ditambahkan!' })
     }
 
     this.$router.push('/profil')
