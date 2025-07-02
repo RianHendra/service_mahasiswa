@@ -417,7 +417,7 @@ export default {
   },
   mounted() {
     this.getProfilMahasiswa()
-
+this.getDataOrangtua();
     // Tunggu DOM selesai render, lalu inisialisasi dropdown menu Metronic
     this.$nextTick(() => {
       if (window.KTMenu) {
@@ -431,6 +431,28 @@ export default {
   methods: {
 
 
+async getDataOrangtua() {
+  const nim = localStorage.getItem('UserNim') // Ambil NIM dari localStorage
+
+  if (!nim) {
+    this.loading = false
+    return
+  }
+
+  try {
+    const response = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua?nim=${nim}`)
+    this.orangtua = response.data // Data berupa array
+  } catch (error) {
+    console.error('Gagal ambil data orang tua:', error)
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal mengambil data orang tua',
+      text: error.response?.data?.message || 'Terjadi kesalahan'
+    })
+  } finally {
+    this.loading = false
+  }
+},
 
 	async deleteOrangtua(id) {
   const result = await Swal.fire({
