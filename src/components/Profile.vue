@@ -427,7 +427,7 @@
       <div class="card-title m-0">
         <h3 class="fw-bold m-0">Data Orang Tua</h3>
       </div>
-      <router-link to="/edit-profil-ortu" class="btn btn-sm btn-primary align-self-center">
+      <router-link to="/edit-profil-ortu"   v-if="!orangTua"  class="btn btn-sm btn-primary align-self-center">
         Tambah Orang Tua
       </router-link>
     </div>
@@ -497,19 +497,15 @@ export default {
     })
   },
   methods: {
-	 async getOrangtua() {
-      try {
-        const nim = localStorage.getItem('UserNim')
-        const response = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/${nim}`)
-        if (response.data && response.data.ortu) {
-          this.orangtua = response.data.ortu
-        }
-      } catch (error) {
-        console.error('Gagal mengambil data orang tua:', error)
-      } finally {
-        this.loading = false
-      }
-	},
+	 async getDataOrangTua() {
+    try {
+      const nim = localStorage.getItem('UserNim')
+      const res = await axios.get(`https://ti054d03.agussbn.my.id/api/mahasiswa/${nim}`)
+      this.orangTua = res.data.ortu.length > 0 ? res.data.ortu[0] : null
+    } catch (error) {
+      console.error('Gagal mengambil data orang tua:', error)
+    }
+  },
 	async deleteOrangtua(id) {
       const konfirmasi = confirm('Yakin ingin menghapus data orang tua ini?')
       if (!konfirmasi) return
