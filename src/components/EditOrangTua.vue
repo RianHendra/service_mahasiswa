@@ -382,6 +382,7 @@ logout() {
   },
 async submitOrangtua() {
   const nim = localStorage.getItem('UserNim')
+  const namaMhs = localStorage.getItem('UserNama') // pastikan kamu simpan nama saat login
 
   // Validasi wajib isi
   if (!this.namaOrtu || !this.nikOrtu) {
@@ -406,12 +407,16 @@ async submitOrangtua() {
   }
 
   const dataOrtu = {
-    nim,
+    nim: nim,
     nama_ortu: this.namaOrtu,
     nik_ortu: this.nikOrtu,
     id_kabupaten: this.idKabupaten,
     id_prov: this.idProvinsi,
-    id_hubungan: this.idHubungan
+    id_hubungan: this.idHubungan,
+    mahasiswa: {
+      nim: nim,
+      nama_mhs: namaMhs || ''
+    }
   }
 
   try {
@@ -433,6 +438,7 @@ async submitOrangtua() {
     })
   }
 }
+
 
 
 
