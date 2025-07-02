@@ -445,10 +445,7 @@
             <button @click="deleteOrangtua(ortu.id_ortu)" class="btn btn-sm btn-danger">Hapus</button>
           </div>
 
-          <label class="col-lg-4 fw-semibold text-muted">NIK</label>
-          <div class="col-lg-8">
-            <span class="fw-bold fs-6 text-gray-800">{{ ortu.nik_ortu }}</span>
-          </div>
+          
         </div>
       </div>
     </div>
