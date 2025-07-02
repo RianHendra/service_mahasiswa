@@ -432,35 +432,36 @@
 										<!--end::Card body-->
 									</div>
 									<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
-										<div class="card-header cursor-pointer">
-										<div class="card-title m-0">
-											<h3 class="fw-bold m-0">Data Orang Tua</h3>
-										</div>
-										<router-link to="/edit-profil" class="btn btn-sm btn-primary align-self-center">
-											Tambah Orang Tua
-										</router-link>
-										</div>
+    <div class="card-header cursor-pointer">
+      <div class="card-title m-0">
+        <h3 class="fw-bold m-0">Data Orang Tua</h3>
+      </div>
+      <router-link to="/edit-profil" class="btn btn-sm btn-primary align-self-center">
+        Tambah Orang Tua
+      </router-link>
+    </div>
 
-										<div class="card-body p-9">
-										<div v-if="loading">Memuat data...</div>
-										<div v-else-if="orangtua.length === 0">
-											<p class="text-muted">Belum ada data orang tua.</p>
-										</div>
-										<div v-else>
-											<div class="row mb-7" v-for="ortu in orangtua" :key="ortu.id_ortu">
-											<label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
-											<div class="col-lg-8">
-												<span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
-											</div>
+    <div class="card-body p-9">
+      <div v-if="loading">Memuat data...</div>
+      <div v-else-if="orangtua.length === 0">
+        <p class="text-muted">Belum ada data orang tua.</p>
+      </div>
+      <div v-else>
+        <div class="row mb-7" v-for="ortu in orangtua" :key="ortu.id_ortu">
+          <label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
+          <div class="col-lg-8 d-flex justify-content-between align-items-center">
+            <span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
+            <button @click="deleteOrangtua(ortu.id_ortu)" class="btn btn-sm btn-danger">Hapus</button>
+          </div>
 
-											<label class="col-lg-4 fw-semibold text-muted">NIK</label>
-											<div class="col-lg-8">
-												<span class="fw-bold fs-6 text-gray-800">{{ ortu.nik_ortu }}</span>
-											</div>
-											</div>
-										</div>
-										</div>
-									</div>
+          <label class="col-lg-4 fw-semibold text-muted">NIK</label>
+          <div class="col-lg-8">
+            <span class="fw-bold fs-6 text-gray-800">{{ ortu.nik_ortu }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 									<!--end::details View-->
 								</div>
 								<!--end::Content container-->
@@ -518,6 +519,19 @@ export default {
         this.loading = false
       }
 	},
+	async deleteOrangtua(id) {
+      const konfirmasi = confirm('Yakin ingin menghapus data orang tua ini?')
+      if (!konfirmasi) return
+
+      try {
+        await axios.delete(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua/${id}`)
+        this.orangtua = this.orangtua.filter(o => o.id_ortu !== id)
+        alert('Data berhasil dihapus.')
+      } catch (error) {
+        console.error('Gagal hapus data orang tua:', error)
+        alert('Gagal menghapus data.')
+      }
+    },
     async getProfilMahasiswa() {
       try {
         const nim = localStorage.getItem('UserNim')
