@@ -235,6 +235,27 @@
 													</div>
 												</div>
 
+												<!-- NIK Orang Tua -->
+												<div class="row mb-6">
+												<label class="col-lg-4 col-form-label required fw-semibold fs-6">NIK Orang Tua</label>
+													<div class="col-lg-8 fv-row">
+														<input type="text" name="nik_ortu" class="form-control form-control-lg form-control-solid" v-model="nikOrtu" />
+													</div>
+												</div>
+											<select v-model="idKabupaten" class="form-select form-select-solid">
+  <option :value="1">Kabupaten Banjar</option>
+</select>
+
+<select v-model="idProvinsi" class="form-select form-select-solid">
+  <option :value="1">Provinsi Kalimantan Selatan</option>
+</select>
+
+<select v-model="idHubungan" class="form-select form-select-solid">
+  <option :value="1">Ayah</option>
+  <option :value="2">Ibu</option>
+  <option :value="3">Wali</option>
+</select>
+
 
 																				</div>
                                                 <!--end::Card body-->
@@ -296,9 +317,9 @@ console.log('Query params:', this.$route.query)
     this.idEditOrtu = q.id
     this.namaOrtu = q.nama_ortu
     this.nikOrtu = q.nik_ortu
-    this.idKabupaten = q.id_kabupaten
-    this.idProvinsi = q.id_prov
-    this.idHubungan = q.id_hubungan
+    this.idKabupaten = Number(q.id_kabupaten)
+    this.idProvinsi = Number(q.id_prov)
+    this.idHubungan = Number(q.id_hubungan)
     this.isEdit = true
   }
    this.getProfilMahasiswa()
