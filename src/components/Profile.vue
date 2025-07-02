@@ -362,6 +362,7 @@
           <label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
           <div class="col-lg-8 d-flex justify-content-between align-items-center">
             <span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
+			<span class="fw-bold fs-6 text-gray-800">{{ ortu.nik_ortu }}</span>
 			<router-link
 			:to="{
 				path: '/edit-profil-ortu',
