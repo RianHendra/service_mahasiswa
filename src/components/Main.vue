@@ -443,7 +443,7 @@ export default {
     jam: item.presensi_dosen.waktu_presensi || '08.00 – 09.40',
     id_pegawai: '',
     image: randomImage,
-    statusKelas: 'dibuka',
+    statusKelas: item.presensi_dosen.status_presensi_dosen === "1" ? "dibuka" : "ditutup",
     statusMahasiswa: item.status_presensi_mhs === '1' ? 'hadir' : 'belum',
     namaKelas: ''
   }
