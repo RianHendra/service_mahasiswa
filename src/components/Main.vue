@@ -424,6 +424,8 @@ export default {
       }
       return false
     })
+    console.log("Data hari ini:", hariIni)
+
     // Map data sederhana
    const images = [
   'https://images.unsplash.com/photo-1519389950473-47ba0277781c',
