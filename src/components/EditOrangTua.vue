@@ -382,9 +382,8 @@ logout() {
   },
 async submitOrangtua() {
   const nim = localStorage.getItem('UserNim')
-  const namaMhs = localStorage.getItem('UserNama') // pastikan kamu simpan nama saat login
 
-  // Validasi wajib isi
+  // Validasi input kosong
   if (!this.namaOrtu || !this.nikOrtu) {
     Swal.fire({
       icon: 'warning',
@@ -395,28 +394,24 @@ async submitOrangtua() {
     return
   }
 
-  // Validasi panjang NIK harus 16 digit
+  // Validasi panjang NIK
   if (this.nikOrtu.length !== 16) {
     Swal.fire({
       icon: 'warning',
       title: 'NIK harus 16 digit!',
-      timer: 2000,
-      showConfirmButton: false
+      text: `NIK yang dimasukkan saat ini berjumlah ${this.nikOrtu.length} digit.`,
+      confirmButtonText: 'OK'
     })
     return
   }
 
   const dataOrtu = {
-    nim: nim,
+    nim,
     nama_ortu: this.namaOrtu,
     nik_ortu: this.nikOrtu,
     id_kabupaten: this.idKabupaten,
     id_prov: this.idProvinsi,
-    id_hubungan: this.idHubungan,
-    mahasiswa: {
-      nim: nim,
-      nama_mhs: namaMhs || ''
-    }
+    id_hubungan: this.idHubungan
   }
 
   try {
@@ -438,6 +433,7 @@ async submitOrangtua() {
     })
   }
 }
+
 
 
 
