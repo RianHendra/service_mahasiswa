@@ -485,7 +485,7 @@ export default {
   },
   mounted() {
     this.getProfilMahasiswa()
-	this.getOrangtua()
+	this.getDataOrangtua()
     // Tunggu DOM selesai render, lalu inisialisasi dropdown menu Metronic
     this.$nextTick(() => {
       if (window.KTMenu) {
