@@ -415,11 +415,10 @@ export default {
       
     const seen = new Set()
     const hariIni = dataPresensi.filter(item => {
-      
-      const idMk = item.presensi_dosen?.id_kelas_mk
-      const isToday = item.presensi_dosen?.tgl_presesi === today
-      const isOpen = item.presensi_dosen?.status_presensi_dosen === "1"
-      if (idMk && isToday && isOpen && !seen.has(idMk)) {
+  const idMk = item.presensi_dosen?.id_kelas_mk
+  const isToday = item.presensi_dosen?.tgl_presesi === today
+  // Hapus pengecekan status presensi_dosen
+      if (idMk && isToday && !seen.has(idMk)) {
         seen.add(idMk)
         return true
       }
@@ -458,6 +457,7 @@ export default {
   klikHadir(index) {
   this.loadingIndex = index;
   const kelas = this.daftarKelas[index];
+  
   const nim = localStorage.getItem('UserNim');
 
   // Panggil API presensi mahasiswa
@@ -467,6 +467,7 @@ export default {
   })
   .then(() => {
     this.daftarKelas[index].statusMahasiswa = 'hadir';
+    
     this.loadingIndex = null;
 
     Swal.fire({
