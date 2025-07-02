@@ -347,9 +347,10 @@
       <div class="card-title m-0">
         <h3 class="fw-bold m-0">Data Orang Tua</h3>
       </div>
-      <router-link to="/edit-profil-ortu"   v-if="!orangTua"  class="btn btn-sm btn-primary align-self-center">
-        Tambah Orang Tua
-      </router-link>
+      <router-link to="/edit-profil-ortu" v-if="orangtua.length === 0 && !loading" class="btn btn-sm btn-primary align-self-center">
+  Tambah Orang Tua
+</router-link>
+
     </div>
 
     <div class="card-body p-9">
@@ -362,9 +363,6 @@
           <label class="col-lg-4 fw-semibold text-muted">Nama Orang Tua</label>
           <div class="col-lg-8 d-flex justify-content-between align-items-center">
             <span class="fw-bold fs-6 text-gray-800">{{ ortu.nama_ortu }}</span>
-			<router-link :to="`/edit-profil-ortu/${ortu.id_ortu}`" class="btn btn-sm btn-warning">
-  Edit
-</router-link>
 
 
             <button @click="deleteOrangtua(ortu.id_ortu)" class="btn btn-sm btn-danger">Hapus</button>
@@ -405,12 +403,6 @@ export default {
 	  orangTua: null,
 	  orangtua: [],
 	  loading: true,
-	  editMode: false,
-		editData: {
-			id_ortu: null,
-			nama_ortu: '',
-			nim: ''
-		}
     }
   },
   mounted() {
