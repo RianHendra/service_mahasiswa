@@ -365,13 +365,13 @@
                                                       <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" v-model="handphone" />
                                                     </div>
                                                   </div>
-                                                </div>
+                                            
 												<!-- Nama Orang Tua -->
 												<div class="row mb-6">
-												<label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Orang Tua</label>
-												<div class="col-lg-8 fv-row">
-													<input type="text" name="nama_ortu" class="form-control form-control-lg form-control-solid" v-model="namaOrtu" />
-												</div>
+													<label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Orang Tua</label>
+													<div class="col-lg-8 fv-row">
+														<input type="text" name="nama_ortu" class="form-control form-control-lg form-control-solid" v-model="namaOrtu" />
+													</div>
 												</div>
 
 												<!-- NIK Orang Tua -->
@@ -381,13 +381,13 @@
 													<input type="text" name="nik_ortu" class="form-control form-control-lg form-control-solid" v-model="nikOrtu" />
 												</div>
 												</div>
-
+    					</div>
                                                 <!--end::Card body-->
                                                 <!--begin::Actions-->
                                                 <div class="card-footer d-flex justify-content-end py-6 px-9">
 												  <router-link to="/profil" class="btn btn-light btn-active-light-primary me-2">Kembali</router-link>
                                                   <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Simpan Perubahan</button>
-												  <button type="button" class="btn btn-success" @click="submitOrangtua">Simpan Orang Tua</button>
+												  <button type="button" class="ml-3 btn btn-success" @click="submitOrangtua">Simpan Orang Tua</button>
                                                 </div>
                                                 <!--end::Actions-->
                                               </form>
