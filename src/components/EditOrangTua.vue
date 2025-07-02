@@ -430,7 +430,7 @@ logout() {
     }
 
     // Reset dan kembali ke /profil
-    this.resetForm()
+
     this.$router.push('/profil')
 
   } catch (error) {
