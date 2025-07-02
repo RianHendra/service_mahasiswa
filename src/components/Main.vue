@@ -457,7 +457,7 @@ export default {
   klikHadir(index) {
   this.loadingIndex = index;
   const kelas = this.daftarKelas[index];
-  const nim = localStorage.getItem('nim');
+  const nim = localStorage.getItem('UserNim');
 
   // Panggil API presensi mahasiswa
   axios.post('https://ti054d01.agussbn.my.id/api/presensi-mahasiswa/hadir', {
