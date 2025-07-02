@@ -514,18 +514,27 @@ export default {
 },
 
 	async deleteOrangtua(id) {
-      const konfirmasi = confirm('Yakin ingin menghapus data orang tua ini?')
-      if (!konfirmasi) return
+  const konfirmasi = confirm('Yakin ingin menghapus data orang tua ini?')
+  if (!konfirmasi) return
 
-      try {
-        await axios.delete(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua/${id}`)
-        this.orangtua = this.orangtua.filter(o => o.id_ortu !== id)
-        alert('Data berhasil dihapus.')
-      } catch (error) {
-        console.error('Gagal hapus data orang tua:', error)
-        alert('Gagal menghapus data.')
-      }
-    },
+  try {
+    await axios.delete(`https://ti054d03.agussbn.my.id/api/mahasiswa/orangtua/${id}`)
+
+    // Filter data ortu
+    this.orangtua = this.orangtua.filter(o => o.id_ortu !== id)
+
+    // Cek ulang: jika tidak ada data ortu, set orangTua ke null agar tombol tambah muncul
+    if (this.orangtua.length === 0) {
+      this.orangTua = null
+    }
+
+    alert('Data berhasil dihapus.')
+  } catch (error) {
+    console.error('Gagal hapus data orang tua:', error)
+    alert('Gagal menghapus data.')
+  }
+}
+,
     async getProfilMahasiswa() {
       try {
         const nim = localStorage.getItem('UserNim')
